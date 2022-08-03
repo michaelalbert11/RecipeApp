@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.page";
-import { MainCourse, SideDish } from "./pages/Category.page";
+import { SideDish } from "./pages/Category.page";
 import NavBar from "./components/NavBar/NavBar.component";
 import SavedRecipes from "./pages/SavedRecipes.page";
 export const RecipeListContext = React.createContext();
@@ -48,7 +48,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="main-courses" element={<MainCourse />} />
+        {/* <Route path="main-courses" element={<MainCourse />} /> */}
         <Route path="side-dishes" element={<SideDish />} />
         <Route path="saved" element={<SavedRecipes />} />
       </Routes>

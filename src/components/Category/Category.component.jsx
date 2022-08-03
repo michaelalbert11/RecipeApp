@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Category.style.scss";
 // import { CategoryContext } from "../../pages/Category.page";
