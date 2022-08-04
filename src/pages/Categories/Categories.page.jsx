@@ -11,9 +11,7 @@ export default function Categories() {
   );
   return (
     <section className="template container">
-      <h1 className="template__heading">
-        {category.replace("||", "or") + "s"}
-      </h1>
+      <h1 className="template__heading">{category.replace("||", "or")}</h1>
       <div className="template-card__grid">
         {newList.length >= 1
           ? newList.map((recipe) => (

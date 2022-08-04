@@ -1,14 +1,13 @@
 .navbar__navigation {
   width: 35%;
-  background-color: hsl(0, 0%, 7%);
+  background-color: hsl(0, 0%, 17%);
   @media (max-width: 800px) {
     width: 91%;
     margin-inline: auto;
     z-index: 2000;
     position: fixed;
-    border: 1px solid;
     border-radius: 10px;
-    bottom: 2px;
+    bottom: 15px;
   }
 
   &-links {
@@ -42,7 +41,7 @@
     }
   }
   & a {
-    color: hsl(0, 0%, 45%);
+    color: hsl(0, 0%, 52%);
   }
   & a.active {
     color: bisque;
