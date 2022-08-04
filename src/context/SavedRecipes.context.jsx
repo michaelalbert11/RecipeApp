@@ -1,14 +1,12 @@
 import React, { useContext, useReducer } from "react";
 import { SavedRecipesReducer } from "../hooks/SavedRecipeReducer.hook";
+import { RecipeListContext } from "../App";
 const SavedRecipesContext = React.createContext();
-const initialSavedRecipes = [];
 const SavedRecipes = ({ children }) => {
-  const [state, dispatch] = useReducer(
-    SavedRecipesReducer,
-    initialSavedRecipes
-  );
+  const recipeList = useContext(RecipeListContext);
+  const [savedRecipes, dispatch] = useReducer(SavedRecipesReducer, recipeList);
   return (
-    <SavedRecipesContext.Provider value={{ state, dispatch }}>
+    <SavedRecipesContext.Provider value={{ savedRecipes, dispatch }}>
       {children}
     </SavedRecipesContext.Provider>
   );

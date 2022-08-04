@@ -3,7 +3,7 @@ import "./RecipeCard.style.scss";
 import { MdBookmarkBorder, MdBookmark } from "react-icons/md";
 import { SavedRecipesState } from "../../context/SavedRecipes.context";
 export default function RecipeCard({ recipe }) {
-  const { state, dispatch } = SavedRecipesState();
+  const { savedRecipes, dispatch } = SavedRecipesState();
   return (
     <div className="recipe-card">
       <img
@@ -13,7 +13,7 @@ export default function RecipeCard({ recipe }) {
       />
       <div className="recipe-card__overlay">
         <span className="recipe-card__title">{recipe.title}</span>
-        {state.some((rec) => rec.id === recipe.id) ? (
+        {savedRecipes.some((rec) => rec.id === recipe.id) ? (
           <span
             onClick={() =>
               dispatch({ type: "REMOVE_FROM_SAVED", payload: recipe })

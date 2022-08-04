@@ -2,9 +2,6 @@
   &-section {
     width: 35%;
     position: relative;
-    @media (max-width: 600px) {
-      width: 100%;
-    }
   }
   &-input-box {
     position: relative;
@@ -13,30 +10,49 @@
   }
   &-input {
     height: 40px;
-    @media (max-width: 600px) {
-      height: 47px;
-    }
     width: 100%;
     color: bisque;
     font-size: 1rem;
     border-radius: 50px;
     padding-left: 15px;
-    background-color: hsl(0, 0%, 20%);
+    background-color: hsl(0, 0%, 17%);
   }
 
   span {
     position: absolute;
     right: 6px;
     z-index: 20;
-    padding: 0.5em 0.5em 0.3em 0.5em;
+    padding: 0.3em 0.3em 0.1em 0.3em;
+
     background-color: hsl(0, 0%, 27%);
     background-color: hsl(33, 100%, 88%);
 
     border-radius: 30px;
   }
   &-icon {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: bisque;
     color: #444;
+  }
+}
+
+// mobile
+
+@media (max-width: 600px) {
+  .navbar__search {
+    &-section {
+      width: 95%;
+    }
+
+    &-input {
+      height: 47px;
+    }
+    span {
+      padding: 0.5em 0.5em 0.3em 0.5em;
+    }
+
+    &-icon {
+      font-size: 1rem;
+    }
   }
 }

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.page";
-import { SideDish } from "./pages/Category.page";
 import NavBar from "./components/NavBar/NavBar.component";
 import SavedRecipes from "./pages/SavedRecipes.page";
+import Categories from "./pages/Categories/Categories.page";
+import Category from "./context/Category.context";
+import { default as SavedRecipesCont } from "./context/SavedRecipes.context";
 export const RecipeListContext = React.createContext();
 function App() {
   const [recipeList, setRecipeList] = useState([]);
@@ -28,13 +30,7 @@ function App() {
               ...recipe,
               image: "https://spoonacular.com/recipeImages/631888-556x470.jpg",
             }
-          : // Object.assign(
-            //   recipe,
-            //   { isEditable: false },
-            //   { isSaved: false },
-            //   { isLikeable: true }
-            // )
-            recipe
+          : recipe
       );
 
       setRecipeList(filteredArray);
@@ -45,13 +41,16 @@ function App() {
   const RecipeListContextValue = recipeList;
   return (
     <RecipeListContext.Provider value={RecipeListContextValue}>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/* <Route path="main-courses" element={<MainCourse />} /> */}
-        <Route path="side-dishes" element={<SideDish />} />
-        <Route path="saved" element={<SavedRecipes />} />
-      </Routes>
+      <SavedRecipesCont>
+        <Category>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="saved" element={<SavedRecipes />} />
+            <Route path="categories/:category" element={<Categories />} />
+          </Routes>
+        </Category>
+      </SavedRecipesCont>
     </RecipeListContext.Provider>
   );
 }

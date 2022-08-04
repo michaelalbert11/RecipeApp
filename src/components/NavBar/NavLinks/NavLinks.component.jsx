@@ -1,17 +1,15 @@
 import { NavLink } from "react-router-dom";
-import {
-  FaAddressCard,
-  FaPlusCircle,
-  FaBookmark,
-  FaCompass,
-} from "react-icons/fa";
+import "./NavLinks.style.scss";
+
+import { FaPlusCircle, FaBookmark, FaUser } from "react-icons/fa";
+import { AiFillHome } from "react-icons/ai";
 export default function NavLinks() {
   return (
     <nav className="navbar__navigation">
       <ul className="navbar__navigation-links">
         <NavLink to={"/"}>
           <li>
-            <FaCompass className="navbar__navigation-link__logo" />
+            <AiFillHome className="navbar__navigation-link__logo" />
           </li>
         </NavLink>
         <NavLink to={"/add-recipe"}>
@@ -28,7 +26,7 @@ export default function NavLinks() {
         </NavLink>
         <NavLink to={"/login"}>
           <li className="navbar__navigation-link">
-            <FaAddressCard className="navbar__navigation-link__logo" />
+            <FaUser className="navbar__navigation-link__logo" />
             <span className="navbar__navigation-link__name">login</span>
           </li>
         </NavLink>

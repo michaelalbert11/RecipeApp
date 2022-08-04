@@ -1,15 +1,14 @@
-// import React, { useContext } from "react";
+import { CategoryState } from "../../context/Category.context";
 import { Link } from "react-router-dom";
 import "./Category.style.scss";
-// import { CategoryContext } from "../../pages/Category.page";
 export default function Category() {
-  // const { filterArray } = useContext(CategoryContext);
+  const { setCategory } = CategoryState();
   return (
     <section className="category">
       <Link
-        // onClick={() => filterArray("main course")}
         className="category__box"
-        to={"/main-courses"}
+        to={"/categories/main-course"}
+        onClick={() => setCategory("main course")}
       >
         <img
           src="https://images.pexels.com/photos/11776375/pexels-photo-11776375.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -20,7 +19,11 @@ export default function Category() {
         <span className="category__title">Main Course</span>
       </Link>
 
-      <Link className="category__box" to={"/side-dishes"}>
+      <Link
+        onClick={() => setCategory("side dish")}
+        className="category__box"
+        to={"categories/side-dishes"}
+      >
         <img
           src="https://images.pexels.com/photos/8952662/pexels-photo-8952662.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt=""
@@ -30,7 +33,11 @@ export default function Category() {
         <span className="category__title">Side dish</span>
       </Link>
 
-      <Link className="category__box" to={"/salads"}>
+      <Link
+        onClick={() => setCategory("salad")}
+        className="category__box"
+        to={"categories/salads"}
+      >
         <img
           src="https://images.pexels.com/photos/1639556/pexels-photo-1639556.jpeg?auto=compress&cs=tinysrgb&w=600"
           alt=""
@@ -40,7 +47,11 @@ export default function Category() {
         <span className="category__title">salad</span>
       </Link>
 
-      <Link className="category__box" to={"/soups"}>
+      <Link
+        onClick={() => setCategory("soup")}
+        className="category__box"
+        to={"categories/soups"}
+      >
         <img
           src="https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?auto=compress&cs=tinysrgb&w=600"
           alt=""
@@ -50,7 +61,11 @@ export default function Category() {
         <span className="category__title">soup</span>
       </Link>
 
-      <Link className="category__box" to={"/breads"}>
+      <Link
+        onClick={() => setCategory("bread")}
+        className="category__box"
+        to={"categories/breads"}
+      >
         <img
           src="https://images.pexels.com/photos/209206/pexels-photo-209206.jpeg?auto=compress&cs=tinysrgb&w=600"
           alt=""
@@ -60,17 +75,25 @@ export default function Category() {
         <span className="category__title">bread</span>
       </Link>
 
-      <Link className="category__box" to={"/deserts"}>
+      <Link
+        onClick={() => setCategory("dessert")}
+        className="category__box"
+        to={"categories/desserts"}
+      >
         <img
           src="https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=600"
           alt=""
           className="category__image"
         />
 
-        <span className="category__title">Desert</span>
+        <span className="category__title">Dessert</span>
       </Link>
 
-      <Link className="category__box" to={"snacks"}>
+      <Link
+        onClick={() => setCategory("snack")}
+        className="category__box"
+        to={"categories/snacks"}
+      >
         <img
           src="https://images.pexels.com/photos/298217/pexels-photo-298217.jpeg?auto=compress&cs=tinysrgb&w=600"
           alt=""
@@ -80,7 +103,11 @@ export default function Category() {
         <span className="category__title">snack</span>
       </Link>
 
-      <Link className="category__box" to={"drinks"}>
+      <Link
+        onClick={() => setCategory("drink" || "beverage")}
+        className="category__box"
+        to={"categories/drinks"}
+      >
         <img
           src="https://images.pexels.com/photos/1194030/pexels-photo-1194030.jpeg?auto=compress&cs=tinysrgb&w=600"
           alt=""

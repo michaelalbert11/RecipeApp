@@ -1,0 +1,50 @@
+.navbar__navigation {
+  width: 35%;
+  background-color: hsl(0, 0%, 7%);
+  @media (max-width: 800px) {
+    width: 91%;
+    margin-inline: auto;
+    z-index: 2000;
+    position: fixed;
+    border: 1px solid;
+    border-radius: 10px;
+    bottom: 2px;
+  }
+
+  &-links {
+    display: flex;
+    gap: 1rem;
+    margin: 0.6em;
+    justify-content: flex-end;
+    align-items: center;
+    @media (max-width: 800px) {
+      font-size: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+      justify-content: space-around;
+    }
+  }
+  &-link {
+    &__logo {
+      @media (min-width: 600px) {
+        display: none;
+      }
+    }
+
+    &__name {
+      white-space: nowrap;
+      font-size: 0.99rem;
+      text-transform: capitalize;
+      @media (max-width: 600px) {
+        display: none;
+      }
+    }
+  }
+  & a {
+    color: hsl(0, 0%, 45%);
+  }
+  & a.active {
+    color: bisque;
+  }
+}
