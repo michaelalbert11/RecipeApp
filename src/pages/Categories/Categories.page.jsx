@@ -4,7 +4,7 @@ import { CategoryState } from "../../context/Category.context";
 import { useContext } from "react";
 import "../template.style.scss";
 export default function Categories() {
-  const recipeList = useContext(RecipeListContext);
+  const { recipeList } = useContext(RecipeListContext);
   const { category } = CategoryState();
   const newList = recipeList.filter((recipe) =>
     recipe.dishTypes.includes(category)

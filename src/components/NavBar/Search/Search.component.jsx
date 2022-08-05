@@ -1,8 +1,8 @@
 import SearchInput from "./SearchInput/SearchInput.component";
 import SearchResultList from "./SearchResultList/SearchResultList.component";
-import { SearchState } from "../../../context/SearchContext.context";
+import { useState } from "react";
 export default function Search() {
-  const { searchValue, setSearchValue } = SearchState();
+  const [searchValue, setSearchValue] = useState("");
   console.log("searchValue", searchValue);
   function handleOnChange(event) {
     setSearchValue(event.target.value);

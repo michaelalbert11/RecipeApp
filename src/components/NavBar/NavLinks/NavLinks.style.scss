@@ -1,7 +1,7 @@
 .navbar__navigation {
   width: 35%;
-  background-color: hsl(0, 0%, 17%);
   @media (max-width: 800px) {
+    background-color: hsl(0, 0%, 17%);
     width: 91%;
     margin-inline: auto;
     z-index: 2000;

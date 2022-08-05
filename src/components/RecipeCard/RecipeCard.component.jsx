@@ -28,6 +28,7 @@ export default function RecipeCard({ recipe }) {
             <MdBookmarkBorder className="recipe-card__icon" />
           </span>
         )}
+        {recipe.isUserAdded && <span>your recipe</span>}
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { RecipeListContext } from "../../../../App";
 import "./SearchResultList.style.scss";
+export let searchResultList = [];
 export default function SearchResultList(props) {
   const { searchValue } = props;
-  const recipeList = useContext(RecipeListContext);
-  const searchResultList = recipeList.filter(
+  const { recipeList } = useContext(RecipeListContext);
+  searchResultList = recipeList.filter(
     (recipe) =>
       recipe.title
         .split(" ")[0]
@@ -16,7 +17,6 @@ export default function SearchResultList(props) {
         .toLowerCase()
         .includes(searchValue.toLowerCase())
   );
-  console.log("searchlist", searchResultList, searchValue);
   return (
     <ul className="navbar__search-result-list">
       {searchResultList.length > 0 ? (

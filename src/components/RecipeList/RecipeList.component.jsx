@@ -3,7 +3,7 @@ import "./RecipeList.style.scss";
 import { RecipeListContext } from "../../App";
 import RecipeCard from "../RecipeCard/RecipeCard.component";
 export default function RecipeList() {
-  const recipeList = useContext(RecipeListContext);
+  const { recipeList } = useContext(RecipeListContext);
   return (
     <section className="recipe-card__grid">
       {recipeList.map((recipe) => (

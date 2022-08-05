@@ -1,5 +1,6 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./SearchInput.style.scss";
 export default function SearchInput(props) {
   const { searchValue, handleOnChange } = props;
@@ -12,7 +13,9 @@ export default function SearchInput(props) {
         onChange={(event) => handleOnChange(event)}
       />
       <span>
-        <FaSearch className="navbar__search-icon" />
+        <Link to={`search${searchValue}`}>
+          <FaSearch className="navbar__search-icon" />
+        </Link>
       </span>
     </div>
   );
