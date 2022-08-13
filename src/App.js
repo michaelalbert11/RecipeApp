@@ -19,7 +19,7 @@ function App() {
   // ebea031fb63040498bef29db8a70d404
   useEffect(() => {
     fetch(
-      "https://api.spoonacular.com/recipes/random?apiKey=ebea031fb63040498bef29db8a70d404&number=100"
+      "https://api.spoonacular.com/recipes/random?apiKey=25e4755ea5894d8098e74f88d8eec18d&number=100"
     )
       .then((response) => response.json())
       .then((data) => {

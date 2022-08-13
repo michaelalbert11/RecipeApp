@@ -5,7 +5,7 @@ export default function RecipeList({ children }) {
   const initialState = {
     loading: true,
     recipeList: [],
-    error: "",
+    error: undefined,
   };
   const [state, dispatch] = useReducer(RecipeListReducer, initialState);
   console.log("data", state.recipeList);
