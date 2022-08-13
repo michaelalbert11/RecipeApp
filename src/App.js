@@ -8,7 +8,6 @@ import Category from "./context/Category.context";
 import { default as SavedRecipesCont } from "./context/SavedRecipes.context";
 import AddRecipe from "./pages/AddRecipe.page";
 import CurrentRecipe from "./context/CurrentRecipe.context";
-import ApiDataFetch from "./api/ApiDataFetch";
 import { RecipeListState } from "./context/RecipeList.context";
 import Loader from "./components/Loader/Loader.component";
 export const RecipeListContext = React.createContext();
@@ -34,7 +33,7 @@ function App() {
           type: "FETCH_ERROR",
         });
       });
-  }, []);
+  }, [dispatch]);
 
   function handleRecipeAdd(newRecipe) {
     setRecipeList((prevState) => [...prevState, newRecipe]);
@@ -45,7 +44,6 @@ function App() {
       <CurrentRecipe>
         <SavedRecipesCont>
           <Category>
-            <ApiDataFetch />
             {state.loading ? (
               <Loader />
             ) : (
