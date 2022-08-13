@@ -6,6 +6,7 @@
   place-items: center;
   overflow: hidden;
 
+  background-color: hsl(0, 0%, 30%);
   background-position: left;
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,7 +17,7 @@
     padding: 0.5em;
     border-radius: 8px;
     @media (max-width: 600px) {
-      padding: 3em 0.5em;
+      margin-inline: 1em;
     }
     background-color: rgba(0, 0, 0, 0.4);
     white-space: pre-wrap;
