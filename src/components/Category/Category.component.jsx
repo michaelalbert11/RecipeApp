@@ -39,7 +39,7 @@ export default function Category() {
         to={"categories/salads"}
       >
         <img
-          src="https://images.pexels.com/photos/1639556/pexels-photo-1639556.jpeg?auto=compress&cs=tinysrgb&w=600"
+          src="https://images.pexels.com/photos/1059905/pexels-photo-1059905.jpeg?auto=compress&cs=tinysrgb&w=600"
           alt=""
           className="category__image"
         />

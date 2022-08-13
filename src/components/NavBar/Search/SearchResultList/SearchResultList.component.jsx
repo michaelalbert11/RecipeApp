@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import { RecipeListContext } from "../../../../App";
+import { RecipeListState } from "../../../../context/RecipeList.context";
 import "./SearchResultList.style.scss";
 export let searchResultList = [];
 export default function SearchResultList(props) {
   const { searchValue } = props;
-  const { recipeList } = useContext(RecipeListContext);
-  searchResultList = recipeList.filter(
+  const { state } = RecipeListState();
+  searchResultList = state.recipeList.filter(
     (recipe) =>
       recipe.title
         .split(" ")[0]

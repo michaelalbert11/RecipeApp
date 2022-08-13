@@ -6,9 +6,6 @@ export default function IngredientInput({ ingredient }) {
   return (
     <div className="recipe-input__field-row">
       <div className="recipe-input__field-box--md">
-        {/* <label className="recipe-input__field-label" htmlFor="">
-          name
-        </label> */}
         <input
           className="recipe-input__field-input"
           type="text"
@@ -18,9 +15,6 @@ export default function IngredientInput({ ingredient }) {
         />
       </div>
       <div className="recipe-input__field-box--md">
-        {/* <label className="recipe-input__field-label" htmlFor="">
-          amount
-        </label> */}
         <input
           className="recipe-input__field-input"
           type="text"
@@ -30,9 +24,6 @@ export default function IngredientInput({ ingredient }) {
         />
       </div>
       <div className="recipe-input__field-box--md">
-        {/* <label className="recipe-input__field-label" htmlFor="">
-          unit
-        </label> */}
         <input
           className="recipe-input__field-input"
           type="text"

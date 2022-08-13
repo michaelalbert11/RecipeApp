@@ -40,7 +40,7 @@ export default function CurrentRecipe({ children }) {
   }
   function handleIngredientChange(event, ingredient) {
     const newIngredient = [...currentRecipe.extendedIngredients];
-    const index = newIngredient.findIndex((i) => (i.id = ingredient.id));
+    const index = newIngredient.findIndex((i) => i.id === ingredient.id);
     newIngredient[index] = {
       ...ingredient,
       [event.target.name]: event.target.value,

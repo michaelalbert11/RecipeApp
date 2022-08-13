@@ -12,7 +12,7 @@ export default function RecipeInput() {
   const { handleRecipeAdd } = useContext(RecipeListContext);
   return (
     <section className="recipe-input">
-      <div className="recipe-input__container">
+      <div className="container">
         <header className="recipe-input__header">edit recipe</header>
         <main className="recipe-input__body">
           <div className="recipe-input__recipe-fields">

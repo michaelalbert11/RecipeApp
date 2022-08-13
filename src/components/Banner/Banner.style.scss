@@ -1,0 +1,24 @@
+.banner {
+  border-radius: 10px;
+  height: 50vmin;
+
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__title {
+    color: bisque;
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    padding: 0.5em;
+    border-radius: 8px;
+    @media (max-width: 600px) {
+      padding: 3em 0.5em;
+    }
+    background-color: rgba(0, 0, 0, 0.4);
+    white-space: pre-wrap;
+  }
+}

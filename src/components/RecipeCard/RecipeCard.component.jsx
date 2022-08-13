@@ -1,4 +1,3 @@
-import React from "react";
 import "./RecipeCard.style.scss";
 import { MdBookmarkBorder, MdBookmark } from "react-icons/md";
 import { SavedRecipesState } from "../../context/SavedRecipes.context";
@@ -8,7 +7,11 @@ export default function RecipeCard({ recipe }) {
     <div className="recipe-card">
       <img
         className="recipe-card__image"
-        src={recipe.image}
+        src={
+          recipe.image === undefined
+            ? "https://spoonacular.com/recipeImages/631888-556x470.jpg"
+            : recipe.image
+        }
         alt={recipe.title}
       />
       <div className="recipe-card__overlay">

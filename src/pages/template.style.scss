@@ -8,9 +8,11 @@
   &-card__grid {
     display: grid;
     gap: 35px;
-    grid-template-columns: repeat(5, minmax(140px, 1fr));
+    grid-template-columns: repeat(5, minmax(200px, 1fr));
   }
-
+  & .recipe-card {
+    margin-bottom: 0;
+  }
   .recipe-card__image {
     height: 20vw;
     object-fit: cover;
@@ -31,9 +33,6 @@
     }
   }
   @media (max-width: 600px) {
-    .recipe-card {
-      margin-bottom: 0;
-    }
     &-card__grid {
       grid-template-columns: repeat(2, minmax(140px, 1fr));
       gap: 20px;
