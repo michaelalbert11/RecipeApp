@@ -11,6 +11,7 @@ export default function IngredientInput({ ingredient }) {
           type="text"
           onChange={(event) => handleIngredientChange(event, ingredient)}
           name="name"
+          placeholder="ingredient"
           value={ingredient.name}
         />
       </div>
@@ -18,6 +19,7 @@ export default function IngredientInput({ ingredient }) {
         <input
           className="recipe-input__field-input"
           type="text"
+          placeholder="amount"
           onChange={(event) => handleIngredientChange(event, ingredient)}
           name="amount"
           value={ingredient.amount}
@@ -29,7 +31,7 @@ export default function IngredientInput({ ingredient }) {
           type="text"
           onChange={(event) => handleIngredientChange(event, ingredient)}
           name="unit"
-          placeholder="no unit"
+          placeholder="unit"
           value={ingredient.unit}
         />
       </div>

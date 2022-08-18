@@ -6,20 +6,21 @@ import { RecipeListState } from "../../context/RecipeList.context";
 export default function RecipeList() {
   const { state } = RecipeListState();
   const [filteredList, setFilteredList] = useState(state.recipeList);
-  const vegList = state.recipeList.filter((recipe) => recipe.vegetarian);
-  const nonVegList = state.recipeList.filter((recipe) => !recipe.vegetarian);
-  function handleOnClick(value) {
-    setFilteredList(
-      (prevState) =>
-        (value === "veg" && vegList) ||
-        (value === "nonveg" && nonVegList) ||
-        (value === "default" && state.recipeList)
-    );
+  function handleOnSelect(event) {
+    (event.target.innerText.toLowerCase() === "veg" &&
+      setFilteredList(
+        state.recipeList.filter((recipe) => recipe.vegetarian)
+      )) ||
+      (event.target.innerText.toLowerCase() === "non veg" &&
+        setFilteredList(
+          state.recipeList.filter((recipe) => !recipe.vegetarian)
+        )) ||
+      (event.target.innerText.toLowerCase() === "no filter" &&
+        setFilteredList(state.recipeList));
   }
-
   return (
     <section>
-      <Filter handleOnClick={handleOnClick} />
+      <Filter handleOnSelect={handleOnSelect} />
       <div className="recipe-card__grid">
         {filteredList.map((recipe) => (
           <RecipeCard

@@ -13,16 +13,19 @@ export default function Categories() {
     recipe.dishTypes.includes(category)
   );
   const [filteredList, setFilteredList] = useState(newList);
-  const vegList = newList.filter((recipe) => recipe.vegetarian);
-  const nonVegList = newList.filter((recipe) => !recipe.vegetarian);
-  function handleOnClick(value) {
-    setFilteredList(
-      (prevState) =>
-        (value === "veg" && vegList) ||
-        (value === "nonveg" && nonVegList) ||
-        (value === "default" && newList)
-    );
+  function handleOnSelect(event) {
+    (event.target.innerText.toLowerCase() === "veg" &&
+      setFilteredList(
+        state.recipeList.filter((recipe) => recipe.vegetarian)
+      )) ||
+      (event.target.innerText.toLowerCase() === "non veg" &&
+        setFilteredList(
+          state.recipeList.filter((recipe) => !recipe.vegetarian)
+        )) ||
+      (event.target.innerText.toLowerCase() === "no filter" &&
+        setFilteredList(state.recipeList));
   }
+
   return (
     <section className="template container">
       <Banner
@@ -46,7 +49,7 @@ export default function Categories() {
         }
         text={category.replace("||", "or")}
       />
-      <Filter handleOnClick={handleOnClick} />
+      <Filter handleOnSelect={handleOnSelect} />
       <div className="template-card__grid">
         {filteredList.length >= 1
           ? filteredList.map((recipe) => (
@@ -61,16 +64,3 @@ export default function Categories() {
     </section>
   );
 }
-// ("https://images.pexels.com/photos/8952662/pexels-photo-8952662.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-
-// ("https://images.pexels.com/photos/1059905/pexels-photo-1059905.jpeg?auto=compress&cs=tinysrgb&w=600");
-
-// ("https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?auto=compress&cs=tinysrgb&w=600");
-
-// ("https://images.pexels.com/photos/209206/pexels-photo-209206.jpeg?auto=compress&cs=tinysrgb&w=600");
-
-// ("https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=600");
-
-// ("https://images.pexels.com/photos/298217/pexels-photo-298217.jpeg?auto=compress&cs=tinysrgb&w=600");
-
-// ("https://images.pexels.com/photos/1194030/pexels-photo-1194030.jpeg?auto=compress&cs=tinysrgb&w=600");

@@ -1,59 +1,60 @@
-import React, { useContext } from "react";
 import "./RecipeInput.style.scss";
-import { CurrentRecipeState } from "../../context/CurrentRecipe.context";
+import {
+  CurrentRecipeState,
+  sampleRecipe,
+} from "../../context/CurrentRecipe.context";
 import IngredientInput from "./IngredientInput.component";
-import { RecipeListContext } from "../../App";
-export default function RecipeInput() {
-  const { currentRecipe, handleRecipeChange, handleIngredientAdd } =
-    CurrentRecipeState();
+import { RecipeListState } from "../../context/RecipeList.context";
+import InstructionInput from "./InstructionInput.component";
+export default function RecipeInput(props) {
+  const {
+    currentRecipe,
+    setCurrentRecipe,
+    handleRecipeChange,
+    handleRecipeChange2,
+    handleIngredientAdd,
+    handleInstructionAdd,
+  } = CurrentRecipeState();
   const Ingredients = currentRecipe.extendedIngredients.map((ingredient) => (
     <IngredientInput ingredient={ingredient} />
   ));
-  const { handleRecipeAdd } = useContext(RecipeListContext);
+  console.log(sampleRecipe, "sampleRecipe");
+  const { title } = props;
+  const { dispatch } = RecipeListState();
   return (
     <section className="recipe-input">
       <div className="container">
-        <header className="recipe-input__header">edit recipe</header>
+        <h1 className="recipe-input__title">{title}</h1>
         <main className="recipe-input__body">
           <div className="recipe-input__recipe-fields">
             <div className="recipe-input__field-box">
-              <label htmlFor="title" className="recipe-input__field-label">
-                name
-              </label>
               <input
                 id="title"
                 name="title"
                 className="recipe-input__field-input"
                 type="text"
                 value={currentRecipe.title}
+                placeholder="recipe name"
                 onChange={(event) => handleRecipeChange(event)}
               />
             </div>
             <div className="recipe-input__field-row">
               <div className="recipe-input__field-box recipe-input__field-box--md">
-                <label
-                  className="recipe-input__field-label"
-                  htmlFor="cook-time"
-                >
-                  Cook time
-                </label>
                 <input
                   id="cook-time"
                   name="readyInMinutes"
                   className="recipe-input__field-input"
                   type="text"
+                  placeholder="cook time"
                   value={currentRecipe.readyInMiuntes}
                   onChange={(event) => handleRecipeChange(event)}
                 />
               </div>
               <div className="recipe-input__field-box recipe-input__field-box--md">
-                <label className="recipe-input__field-label" htmlFor="servings">
-                  servings
-                </label>
-
                 <input
                   id="servings"
                   name="servings"
+                  placeholder="servings"
                   className="recipe-input__field-input"
                   type="text"
                   value={currentRecipe.servings}
@@ -61,66 +62,60 @@ export default function RecipeInput() {
                 />
               </div>
             </div>
-            <div className="recipe-input__field-box">
-              <label className="recipe-input__field-label" htmlFor="image">
-                image url
-              </label>
-
-              <input
-                id="image"
-                name="image"
-                className="recipe-input__field-input"
-                type="text"
-                value={currentRecipe.image}
-                onChange={(event) => handleRecipeChange(event)}
-              />
+            <div className="recipe-input__field-row">
+              <div className="recipe-input__field-box">
+                <input
+                  id="image"
+                  name="image"
+                  className="recipe-input__field-input"
+                  type="text"
+                  placeholder="image url"
+                  value={currentRecipe.image}
+                  onChange={(event) => handleRecipeChange(event)}
+                />
+              </div>
+              <div className="recipe-input__field-box">
+                <input
+                  id="image"
+                  name="dishTypes"
+                  className="recipe-input__field-input"
+                  type="text"
+                  placeholder="recipe category"
+                  value={currentRecipe.dishTypes.join(",")}
+                  onChange={(event) => handleRecipeChange2(event)}
+                />
+              </div>
             </div>
-            <div className="recipe-input__field-box">
-              <label
-                className="recipe-input__field-label"
-                htmlFor="instructions"
-              >
-                instructions
-              </label>
-              <textarea
-                id="instructions"
-                name="instructions"
-                className="recipe-input__field-input recipe-input__field-input-tex"
-                rows="7"
-                value={currentRecipe.instructions}
-                onChange={(event) => handleRecipeChange(event)}
-              />
+            <div className="recipe-input__instruction-fields">
+              {currentRecipe.analyzedInstructions[0].steps.map((step) => (
+                <InstructionInput instruction={step} />
+              ))}
             </div>
           </div>
-          <div className="recipe-input__ingredient-fields">
-            {/* <h3 className="recipe-input__heading">ingredients</h3>
-          <button onChange={handleAddIngredient}>Add </button> */}
-            <div className="recipe-input__ingredient-heading">
-              <label className="recipe-input__field-label">Ingredient</label>
-              <label className="recipe-input__field-label">amount</label>
-              <label className="recipe-input__field-label">unit</label>
-            </div>
-            {Ingredients}
-          </div>
+          <div className="recipe-input__ingredient-fields">{Ingredients}</div>
         </main>
         <footer className="recipe-input__footer">
-          {/* <button onClick={handleAddRecipe} name="add">
-          Add
-        </button> */}
-
           <button
-            className="recipe-input__btn"
-            onClick={() => handleRecipeAdd(currentRecipe)}
+            className="recipe-input__btn recipe-input__btn--main"
+            onClick={() =>
+              dispatch({ type: "ADD RECIPE", payload: currentRecipe })
+            }
           >
             Add Recipe
           </button>
-          <button
-            className="recipe-input__btn"
-            onClick={handleIngredientAdd}
-            name="add"
-          >
-            Add a ingredient
-          </button>
+          <div className="flex-center">
+            <button className="recipe-input__btn" onClick={handleIngredientAdd}>
+              Add ingredient
+            </button>
+
+            <button
+              className="recipe-input__btn"
+              onMouseDown={() => setCurrentRecipe(sampleRecipe)}
+              onClick={handleInstructionAdd}
+            >
+              add instruction
+            </button>
+          </div>
         </footer>
       </div>
     </section>

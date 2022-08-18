@@ -12,6 +12,12 @@ export const RecipeListReducer = (state, action) => {
         recipeList: [],
         error: "something Went Wrong",
       };
+    case "ADD RECIPE":
+      return {
+        loading: false,
+        recipeList: [...state.recipeList, action.payload],
+        error: "",
+      };
     default:
       return state;
   }

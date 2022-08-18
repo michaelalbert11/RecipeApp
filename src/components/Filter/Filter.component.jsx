@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./Filter.style.scss";
-import { MdCircle, MdArrowDropDown } from "react-icons/md";
+import { MdArrowDropDown } from "react-icons/md";
 export default function Filter(props) {
-  const { handleOnClick } = props;
+  const { handleOnSelect } = props;
   const [filterState, setFilterState] = useState({
-    selectedOption: "no filter",
+    selectedOption: "No Filter",
     optionActive: false,
   });
+
   function setCurrentOption(event) {
     setFilterState((prevState) => ({
       ...prevState,
@@ -36,39 +37,31 @@ export default function Filter(props) {
       {filterState.optionActive && (
         <ul className="filter__options">
           <li
-            className="filter__option flex-centerd-btw"
+            className="filter__option "
             onMouseDown={(event) => {
+              handleOnSelect(event);
               setCurrentOption(event);
-              handleOnClick("default");
             }}
           >
             <span>no filter</span>
           </li>
           <li
-            className="filter__option flex-centerd-btw"
+            className="filter__option "
             onMouseDown={(event) => {
+              handleOnSelect(event);
               setCurrentOption(event);
-              handleOnClick("veg");
             }}
           >
             <span>veg</span>
-            <MdCircle
-              style={{ color: "green" }}
-              className="filter__option-icon"
-            />
           </li>
           <li
-            className="filter__option flex-centerd-btw"
+            className="filter__option "
             onMouseDown={(event) => {
+              handleOnSelect(event);
               setCurrentOption(event);
-              handleOnClick("nonveg");
             }}
           >
             <span>non veg</span>
-            <MdCircle
-              style={{ color: "red" }}
-              className="filter__option-icon"
-            />
           </li>
         </ul>
       )}

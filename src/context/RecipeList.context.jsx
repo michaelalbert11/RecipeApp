@@ -8,7 +8,7 @@ export default function RecipeList({ children }) {
     error: undefined,
   };
   const [state, dispatch] = useReducer(RecipeListReducer, initialState);
-  console.log("data", state.recipeList);
+  console.log("data", state);
 
   return (
     <RecipeListContext2.Provider value={{ state, dispatch }}>
