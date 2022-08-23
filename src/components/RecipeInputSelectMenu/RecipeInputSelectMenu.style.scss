@@ -1,0 +1,72 @@
+.select-menu {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 20px;
+  position: relative;
+  font-family: product-bold;
+  font-size: 1rem;
+
+  &__btn {
+    width: 100%;
+    height: 42px;
+
+    border-radius: 5px;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: bisque;
+    background-color: hsl(0, 0%, 17%);
+
+    font-family: inherit;
+    font-size: inherit;
+
+    padding-inline: 1em;
+
+    @media (max-width: 600px) {
+      height: 50px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &-icon {
+      display: block;
+      font-size: 1.1rem;
+    }
+  }
+
+  &__options {
+    position: absolute;
+    border-radius: 5px;
+    width: 100%;
+    padding-block: 0.5em;
+    z-index: 20;
+    color: bisque;
+    max-height: 180px;
+    overflow: auto;
+    background-color: hsl(0, 0%, 13%);
+  }
+
+  &__option {
+    padding: 0.8em 1em;
+
+    &:hover {
+      cursor: pointer;
+      background-color: hsl(0, 0%, 22%);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .select-menu {
+    position: unset;
+
+    &__options {
+      left: 0;
+    }
+  }
+}

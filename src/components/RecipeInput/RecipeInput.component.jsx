@@ -3,24 +3,88 @@ import {
   CurrentRecipeState,
   sampleRecipe,
 } from "../../context/CurrentRecipe.context";
-import IngredientInput from "./IngredientInput.component";
+import IngredientInput from "../IngredientInput/IngredientInput.component";
 import { RecipeListState } from "../../context/RecipeList.context";
 import InstructionInput from "./InstructionInput.component";
+import RecipeInputSelectMenu from "../RecipeInputSelectMenu/RecipeInputSelectMenu.component";
 export default function RecipeInput(props) {
   const {
     currentRecipe,
     setCurrentRecipe,
     handleRecipeChange,
-    handleRecipeChange2,
     handleIngredientAdd,
     handleInstructionAdd,
   } = CurrentRecipeState();
   const Ingredients = currentRecipe.extendedIngredients.map((ingredient) => (
     <IngredientInput ingredient={ingredient} />
   ));
-  console.log(sampleRecipe, "sampleRecipe");
+
   const { title } = props;
   const { dispatch } = RecipeListState();
+
+  function handleRecipeTypeSelect(event) {
+    (event.target.innerText === "veg" &&
+      setCurrentRecipe((prevState) => ({ ...prevState, vegetarian: true }))) ||
+      (event.target.innerText === "non veg" &&
+        setCurrentRecipe((prevState) => ({ ...prevState, vegetarian: false })));
+  }
+
+  function handelRecipeCategorySelect(event) {
+    const category = event.target.innerText;
+    switch (category) {
+      case "main course":
+        setCurrentRecipe((prevState) => ({
+          ...prevState,
+          dishTypes: [category],
+        }));
+        break;
+      case "side dish":
+        setCurrentRecipe((prevState) => ({
+          ...prevState,
+          dishTypes: [category],
+        }));
+        break;
+      case "salad":
+        setCurrentRecipe((prevState) => ({
+          ...prevState,
+          dishTypes: [category],
+        }));
+        break;
+      case "soup":
+        setCurrentRecipe((prevState) => ({
+          ...prevState,
+          dishTypes: [category],
+        }));
+        break;
+      case "bread":
+        setCurrentRecipe((prevState) => ({
+          ...prevState,
+          dishTypes: [category],
+        }));
+        break;
+      case "dessert":
+        setCurrentRecipe((prevState) => ({
+          ...prevState,
+          dishTypes: [category],
+        }));
+        break;
+      case "snack":
+        setCurrentRecipe((prevState) => ({
+          ...prevState,
+          dishTypes: [category],
+        }));
+        break;
+      case "drink":
+        setCurrentRecipe((prevState) => ({
+          ...prevState,
+          dishTypes: [category],
+        }));
+        break;
+
+      default:
+        break;
+    }
+  }
   return (
     <section className="recipe-input">
       <div className="container">
@@ -34,7 +98,7 @@ export default function RecipeInput(props) {
                 className="recipe-input__field-input"
                 type="text"
                 value={currentRecipe.title}
-                placeholder="recipe name"
+                placeholder="recipe name : beef soup"
                 onChange={(event) => handleRecipeChange(event)}
               />
             </div>
@@ -45,7 +109,7 @@ export default function RecipeInput(props) {
                   name="readyInMinutes"
                   className="recipe-input__field-input"
                   type="text"
-                  placeholder="cook time"
+                  placeholder="cook time : 40 min"
                   value={currentRecipe.readyInMiuntes}
                   onChange={(event) => handleRecipeChange(event)}
                 />
@@ -54,7 +118,7 @@ export default function RecipeInput(props) {
                 <input
                   id="servings"
                   name="servings"
-                  placeholder="servings"
+                  placeholder="servings : 3"
                   className="recipe-input__field-input"
                   type="text"
                   value={currentRecipe.servings}
@@ -62,30 +126,45 @@ export default function RecipeInput(props) {
                 />
               </div>
             </div>
-            <div className="recipe-input__field-row">
-              <div className="recipe-input__field-box">
-                <input
-                  id="image"
-                  name="image"
-                  className="recipe-input__field-input"
-                  type="text"
-                  placeholder="image url"
-                  value={currentRecipe.image}
-                  onChange={(event) => handleRecipeChange(event)}
-                />
-              </div>
-              <div className="recipe-input__field-box">
-                <input
-                  id="image"
-                  name="dishTypes"
-                  className="recipe-input__field-input"
-                  type="text"
-                  placeholder="recipe category"
-                  value={currentRecipe.dishTypes.join(",")}
-                  onChange={(event) => handleRecipeChange2(event)}
-                />
-              </div>
+            <div
+              style={{ marginBottom: "20px" }}
+              className="recipe-input__field-box"
+            >
+              <input
+                id="image"
+                name="image"
+                className="recipe-input__field-input"
+                type="text"
+                placeholder="image url : www.gallery.com/photo-12321"
+                value={currentRecipe.image}
+                onChange={(event) => handleRecipeChange(event)}
+              />
             </div>
+
+            <div className="recipe-input__field-row">
+              <RecipeInputSelectMenu
+                options={["veg", "non veg"]}
+                handleOnSelect={(event) => handleRecipeTypeSelect(event)}
+                condition={() => (currentRecipe.vegetarian ? "veg" : "non veg")}
+              />
+              <RecipeInputSelectMenu
+                options={[
+                  "main course",
+                  "side dish",
+                  "salad",
+                  "soup",
+                  "bread",
+                  "dessert",
+                  "snack",
+                  "drink",
+                ]}
+                handleOnSelect={(event) => {
+                  handelRecipeCategorySelect(event);
+                }}
+                condition={() => currentRecipe.dishTypes}
+              />
+            </div>
+
             <div className="recipe-input__instruction-fields">
               {currentRecipe.analyzedInstructions[0].steps.map((step) => (
                 <InstructionInput instruction={step} />
@@ -97,23 +176,22 @@ export default function RecipeInput(props) {
         <footer className="recipe-input__footer">
           <button
             className="recipe-input__btn recipe-input__btn--main"
-            onClick={() =>
+            onClick={() => setCurrentRecipe(sampleRecipe)}
+            onMouseDown={() =>
               dispatch({ type: "ADD RECIPE", payload: currentRecipe })
             }
           >
             Add Recipe
           </button>
           <div className="flex-center">
-            <button className="recipe-input__btn" onClick={handleIngredientAdd}>
-              Add ingredient
-            </button>
-
             <button
               className="recipe-input__btn"
-              onMouseDown={() => setCurrentRecipe(sampleRecipe)}
               onClick={handleInstructionAdd}
             >
               add instruction
+            </button>
+            <button className="recipe-input__btn" onClick={handleIngredientAdd}>
+              Add ingredient
             </button>
           </div>
         </footer>

@@ -3,12 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 const CurrentRecipeContext = React.createContext();
 export const sampleRecipe = {
   id: uuidv4(),
-  vegetarian: true,
+  vegetarian: false,
   title: "",
   readyInMinutes: "",
   servings: "",
   image: "",
-  dishTypes: [""],
+  dishTypes: ["main course"],
   analyzedInstructions: [
     {
       steps: [
@@ -56,12 +56,6 @@ export default function CurrentRecipe({ children }) {
       [event.target.name]: event.target.value,
     });
   }
-  function handleRecipeChange2(event) {
-    setCurrentRecipe({
-      ...currentRecipe,
-      [event.target.name]: event.target.value.split(","),
-    });
-  }
 
   function handleIngredientChange(event, ingredient) {
     const newIngredient = [...currentRecipe.extendedIngredients];
@@ -99,22 +93,24 @@ export default function CurrentRecipe({ children }) {
   }
 
   function handleInstructionAdd() {
-    setCurrentRecipe({
-      ...currentRecipe,
+    const newInstructions = [
+      ...currentRecipe.analyzedInstructions[0].steps,
+      {
+        id: uuidv4(),
+        number: currentRecipe.analyzedInstructions[0].steps.length + 1,
+        step: "",
+      },
+    ];
+
+    setCurrentRecipe((prevState) => ({
+      ...prevState,
       analyzedInstructions: [
         {
-          ...currentRecipe.analyzedInstructions[0],
-          steps: [
-            ...currentRecipe.analyzedInstructions[0].steps,
-            {
-              id: uuidv4(),
-              number: currentRecipe.analyzedInstructions[0].steps.length + 1,
-              step: "",
-            },
-          ],
+          ...prevState.analyzedInstructions[0],
+          steps: newInstructions,
         },
       ],
-    });
+    }));
   }
 
   function handleIngredientDelete(id) {
@@ -146,7 +142,6 @@ export default function CurrentRecipe({ children }) {
         currentRecipe,
         setCurrentRecipe,
         handleRecipeChange,
-        handleRecipeChange2,
         handleIngredientChange,
         handleIngredientAdd,
         handleInstructionChange,

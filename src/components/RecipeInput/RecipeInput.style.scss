@@ -1,6 +1,7 @@
 .recipe-input {
   font-family: product-bold;
   margin-top: 20px;
+  margin-bottom: 0;
   &__container {
     max-width: 1000px;
     width: 80%;
@@ -20,20 +21,25 @@
     gap: 20px;
   }
   &__recipe-fields {
-    width: 50%;
+    width: 100%;
     padding-top: 15px;
   }
-
-  &__ingredient-fields {
-    padding-top: 15px;
-    height: 70vh;
-    width: 50%;
-    overflow-y: auto;
+  &__instruction-fields &__field-box {
+    position: relative;
+    display: flex;
+    align-items: center;
   }
 
-  &__ingredient-fields &__field-row + &__field-row {
+  &__instruction-fields &__field-box + &__field-box {
     margin-top: 20px;
+    margin-bottom: 0;
   }
+
+  &__instruction-fields &__btn-delete {
+    position: absolute;
+    right: 5px;
+  }
+
   &__field-box {
     width: 100%;
     position: relative;
@@ -43,24 +49,14 @@
       margin-bottom: 0;
     }
   }
+
   &__field-row {
     display: flex;
     gap: 20px;
     align-items: center;
+    position: relative;
   }
 
-  &__instruction-fields &__field-row + &__field-row {
-    margin-top: 20px;
-  }
-
-  &__instruction-fields &__field-row {
-    gap: 10px;
-  }
-
-  &__ingredient-heading {
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-  }
   &__field-input {
     width: 100%;
     height: 42px;
@@ -69,7 +65,7 @@
     background-color: hsl(0, 0%, 17%);
     color: bisque;
     font-size: 1.05rem;
-    border-radius: 3px;
+    border-radius: 5px;
 
     &::placeholder {
       color: hsl(0, 0%, 54%);
@@ -83,6 +79,7 @@
 
   &__footer {
     padding: 0.5em;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -106,31 +103,20 @@
       color: hsl(0, 0%, 13%);
     }
   }
-
   &__btn-delete {
     font-size: 1.8rem;
     background-color: inherit;
     border: none;
     padding: 0;
 
+    background-color: hsl(0, 0%, 17%);
+
     &-icon {
       padding-top: 0.2em;
       color: hsl(0, 0%, 66%);
     }
     &:hover &-icon {
-      color: red;
-    }
-  }
-}
-
-@media (max-width: 800px) {
-  .recipe-input {
-    &__body {
-      flex-direction: column;
-    }
-    &__recipe-fields,
-    &__ingredient-fields {
-      width: 100%;
+      cursor: pointer;
     }
   }
 }
@@ -140,34 +126,60 @@
   align-items: center;
   gap: 20px;
 }
+
+@media (max-width: 800px) {
+  .recipe-input {
+    &__body {
+      flex-direction: column;
+    }
+  }
+}
+
 @media (max-width: 600px) {
   .recipe-input {
     margin-bottom: 4rem;
 
     &__body {
       gap: 5px;
+      height: 43vh;
+      overflow: auto;
     }
-    &__ingredient-fields {
-      overflow: unset;
-      height: unset;
+
+    &__field-input {
+      height: 50px;
     }
 
     &__footer {
+      border-top: 1px solid bisque;
+      background-color: hsl(0, 0%, 7%);
       border-bottom: none;
       flex-direction: column-reverse;
-      gap: 10px;
-      padding-top: 1.5em;
+      gap: 20px;
+      padding-top: 1em;
       padding-inline: 0;
     }
     &__btn-delete-icon {
       color: tomato;
     }
     .flex-center {
-      gap: 10px;
+      gap: 20px;
     }
 
     .flex-center button {
       width: 50%;
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .recipe-input {
+    &__recipe-fields {
+      max-height: 66.8vh;
+    }
+
+    &__instruction-fields {
+      max-height: 25.7vh;
+      overflow: auto;
     }
   }
 }

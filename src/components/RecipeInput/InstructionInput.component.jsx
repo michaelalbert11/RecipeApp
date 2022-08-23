@@ -4,8 +4,7 @@ export default function InstructionInput({ instruction }) {
   const { handleInstructionChange, handleInstructionDelete } =
     CurrentRecipeState();
   return (
-    <div className="recipe-input__field-row">
-      <span style={{ color: "bisque" }}>{instruction.number}</span>
+    <div className="recipe-input__field-box">
       <input
         className="recipe-input__field-input"
         type="text"
