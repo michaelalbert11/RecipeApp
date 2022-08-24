@@ -1,3 +1,6 @@
+:root {
+  --toastify-color-dark: hsl(0, 0%, 17%);
+}
 @font-face {
   font-family: "product";
   src: url("./assets/fonts/Product\ Sans\ Regular.ttf");
@@ -12,6 +15,7 @@
 *::after {
   box-sizing: border-box;
 }
+
 h1,
 h2,
 h3,
@@ -64,4 +68,47 @@ code {
   max-width: 1250px;
   width: 90%;
   margin: auto;
+}
+
+.Toastify__toast-body > div:last-child {
+  font-family: product-bold;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  color: hsl(0, 0%, 44.3%);
+}
+.Toastify__toast {
+  border: 3px solid hsl(0, 0%, 44.3%);
+}
+.Toastify__close-button {
+  display: none;
+}
+.Toastify__toast-icon {
+  min-width: 25px;
+}
+
+@media (max-width: 600px) {
+  .Toastify__toast-container {
+    height: 100vh;
+    min-width: 100vw;
+    display: grid;
+    place-items: center;
+  }
+  .Toastify__toast {
+    min-width: 200px;
+    height: 200px;
+  }
+  .Toastify__toast-body {
+    flex-direction: column;
+    padding: 32px;
+    gap: 20px;
+  }
+  .Toastify__toast-icon {
+    min-width: 50px;
+    margin-inline-start: 10px;
+  }
+
+  .Toastify__toast-body > div:last-child {
+    white-space: pre;
+    text-align: center;
+  }
 }

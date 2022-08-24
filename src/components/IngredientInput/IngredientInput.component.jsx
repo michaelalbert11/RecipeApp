@@ -42,7 +42,7 @@ export default function IngredientInput({ ingredient, notify }) {
         className="recipe-input__btn-delete"
         onClick={() => {
           handleIngredientDelete(ingredient.id);
-          notify("deleted a ingredient field");
+          notify("removed \ningredient field");
         }}
       >
         <MdClear className="recipe-input__btn-delete-icon" />

@@ -42,7 +42,7 @@ export default function RecipeCard({ recipe }) {
       </div>
       <ToastContainer
         position="top-center"
-        theme="colored"
+        theme="dark"
         closeOnClick={false}
         autoClose={800}
         hideProgressBar

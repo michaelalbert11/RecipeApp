@@ -16,7 +16,7 @@ export default function InstructionInput({ instruction, notify }) {
         className="recipe-input__btn-delete"
         onClick={() => {
           handleInstructionDelete(instruction.id);
-          notify("instruction field removed");
+          notify("removed \ninstruction field ");
         }}
       >
         <MdClear className="recipe-input__btn-delete-icon" />

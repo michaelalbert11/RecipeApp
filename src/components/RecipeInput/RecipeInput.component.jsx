@@ -4,7 +4,6 @@ import {
   sampleRecipe,
 } from "../../context/CurrentRecipe.context";
 import IngredientInput from "../IngredientInput/IngredientInput.component";
-import { RecipeListState } from "../../context/RecipeList.context";
 import InstructionInput from "./InstructionInput.component";
 import RecipeInputSelectMenu from "../RecipeInputSelectMenu/RecipeInputSelectMenu.component";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,15 +15,14 @@ export default function RecipeInput(props) {
     handleIngredientAdd,
     handleInstructionAdd,
   } = CurrentRecipeState();
+  const { title, handler, action } = props;
+
   const Ingredients = currentRecipe.extendedIngredients.map((ingredient) => (
     <IngredientInput
       notify={(message) => notifyDelete(message)}
       ingredient={ingredient}
     />
   ));
-
-  const { title } = props;
-  const { dispatch } = RecipeListState();
 
   function handleRecipeTypeSelect(event) {
     (event.target.innerText === "veg" &&
@@ -193,26 +191,24 @@ export default function RecipeInput(props) {
             className="recipe-input__btn recipe-input__btn--main"
             onClick={() => {
               setCurrentRecipe(sampleRecipe);
-              notifyRecipeAdd("Added this recipe");
+              notifyRecipeAdd("recipe added");
             }}
-            onMouseDown={() =>
-              dispatch({ type: "ADD RECIPE", payload: currentRecipe })
-            }
+            onMouseDown={() => handler()}
           >
-            Add Recipe
+            {action}
           </button>
           <div className="flex-center">
             <button
               className="recipe-input__btn"
               onClick={handleInstructionAdd}
-              onMouseDown={() => notifyAdd("added new instruction field")}
+              onMouseDown={() => notifyAdd("added \n instruction field")}
             >
               add instruction
             </button>
             <button
               className="recipe-input__btn"
               onClick={handleIngredientAdd}
-              onMouseDown={() => notifyAdd("added new ingredient field")}
+              onMouseDown={() => notifyAdd("added \n ingredient field")}
             >
               Add ingredient
             </button>
@@ -220,7 +216,8 @@ export default function RecipeInput(props) {
         </footer>
       </div>
       <ToastContainer
-        theme="colored"
+        theme="dark"
+        position="top-center"
         hideProgressBar
         autoClose={800}
         closeOnClick={false}
