@@ -1,6 +1,6 @@
 import { MdClear } from "react-icons/md";
 import { CurrentRecipeState } from "../../context/CurrentRecipe.context";
-export default function InstructionInput({ instruction }) {
+export default function InstructionInput({ instruction, notify }) {
   const { handleInstructionChange, handleInstructionDelete } =
     CurrentRecipeState();
   return (
@@ -14,7 +14,10 @@ export default function InstructionInput({ instruction }) {
       />
       <button
         className="recipe-input__btn-delete"
-        onClick={() => handleInstructionDelete(instruction.id)}
+        onClick={() => {
+          handleInstructionDelete(instruction.id);
+          notify("instruction field removed");
+        }}
       >
         <MdClear className="recipe-input__btn-delete-icon" />
       </button>

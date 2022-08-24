@@ -10,7 +10,7 @@ import AddRecipe from "./pages/AddRecipe.page";
 import CurrentRecipe from "./context/CurrentRecipe.context";
 import { RecipeListState } from "./context/RecipeList.context";
 import Loader from "./components/Loader/Loader.component";
-export const RecipeListContext = React.createContext();
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const { state, dispatch } = RecipeListState();
   // 25e4755ea5894d8098e74f88d8eec18d

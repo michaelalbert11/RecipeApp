@@ -7,6 +7,7 @@ import IngredientInput from "../IngredientInput/IngredientInput.component";
 import { RecipeListState } from "../../context/RecipeList.context";
 import InstructionInput from "./InstructionInput.component";
 import RecipeInputSelectMenu from "../RecipeInputSelectMenu/RecipeInputSelectMenu.component";
+import { ToastContainer, toast } from "react-toastify";
 export default function RecipeInput(props) {
   const {
     currentRecipe,
@@ -16,7 +17,10 @@ export default function RecipeInput(props) {
     handleInstructionAdd,
   } = CurrentRecipeState();
   const Ingredients = currentRecipe.extendedIngredients.map((ingredient) => (
-    <IngredientInput ingredient={ingredient} />
+    <IngredientInput
+      notify={(message) => notifyDelete(message)}
+      ingredient={ingredient}
+    />
   ));
 
   const { title } = props;
@@ -85,6 +89,14 @@ export default function RecipeInput(props) {
         break;
     }
   }
+  const notifyAdd = (message) => toast.success(message);
+  const notifyDelete = (message) => toast.error(message);
+
+  const notifyRecipeAdd = (message) =>
+    toast.warning(message, {
+      position: "top-center",
+      autoClose: 1000,
+    });
   return (
     <section className="recipe-input">
       <div className="container">
@@ -167,7 +179,10 @@ export default function RecipeInput(props) {
 
             <div className="recipe-input__instruction-fields">
               {currentRecipe.analyzedInstructions[0].steps.map((step) => (
-                <InstructionInput instruction={step} />
+                <InstructionInput
+                  notify={(message) => notifyDelete(message)}
+                  instruction={step}
+                />
               ))}
             </div>
           </div>
@@ -176,7 +191,10 @@ export default function RecipeInput(props) {
         <footer className="recipe-input__footer">
           <button
             className="recipe-input__btn recipe-input__btn--main"
-            onClick={() => setCurrentRecipe(sampleRecipe)}
+            onClick={() => {
+              setCurrentRecipe(sampleRecipe);
+              notifyRecipeAdd("Added this recipe");
+            }}
             onMouseDown={() =>
               dispatch({ type: "ADD RECIPE", payload: currentRecipe })
             }
@@ -187,15 +205,26 @@ export default function RecipeInput(props) {
             <button
               className="recipe-input__btn"
               onClick={handleInstructionAdd}
+              onMouseDown={() => notifyAdd("added new instruction field")}
             >
               add instruction
             </button>
-            <button className="recipe-input__btn" onClick={handleIngredientAdd}>
+            <button
+              className="recipe-input__btn"
+              onClick={handleIngredientAdd}
+              onMouseDown={() => notifyAdd("added new ingredient field")}
+            >
               Add ingredient
             </button>
           </div>
         </footer>
       </div>
+      <ToastContainer
+        theme="colored"
+        hideProgressBar
+        autoClose={800}
+        closeOnClick={false}
+      />
     </section>
   );
 }

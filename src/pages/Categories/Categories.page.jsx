@@ -15,15 +15,11 @@ export default function Categories() {
   const [filteredList, setFilteredList] = useState(newList);
   function handleOnSelect(event) {
     (event.target.innerText.toLowerCase() === "veg" &&
-      setFilteredList(
-        state.recipeList.filter((recipe) => recipe.vegetarian)
-      )) ||
+      setFilteredList(newList.filter((recipe) => recipe.vegetarian))) ||
       (event.target.innerText.toLowerCase() === "non veg" &&
-        setFilteredList(
-          state.recipeList.filter((recipe) => !recipe.vegetarian)
-        )) ||
+        setFilteredList(newList.filter((recipe) => !recipe.vegetarian))) ||
       (event.target.innerText.toLowerCase() === "no filter" &&
-        setFilteredList(state.recipeList));
+        setFilteredList(newList));
   }
 
   return (

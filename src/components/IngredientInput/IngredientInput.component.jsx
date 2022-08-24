@@ -1,7 +1,7 @@
 import { MdClear } from "react-icons/md";
 import { CurrentRecipeState } from "../../context/CurrentRecipe.context";
 import "./IngredientInput.style.scss";
-export default function IngredientInput({ ingredient }) {
+export default function IngredientInput({ ingredient, notify }) {
   const { handleIngredientChange, handleIngredientDelete } =
     CurrentRecipeState();
   return (
@@ -40,7 +40,10 @@ export default function IngredientInput({ ingredient }) {
       </div>
       <button
         className="recipe-input__btn-delete"
-        onClick={() => handleIngredientDelete(ingredient.id)}
+        onClick={() => {
+          handleIngredientDelete(ingredient.id);
+          notify("deleted a ingredient field");
+        }}
       >
         <MdClear className="recipe-input__btn-delete-icon" />
       </button>
