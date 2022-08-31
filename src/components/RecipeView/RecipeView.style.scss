@@ -11,15 +11,16 @@
     display: grid;
     place-items: center;
   }
-
+  &__container {
+    width: 100%;
+  }
   &__recipe {
-    display: flex;
+    height: 100vh;
     background-color: hsl(0, 0%, 13%);
     font-family: product-bold;
     color: bisque;
-    min-height: 50vw;
+
     &-image-backdrop {
-      width: 45%;
       display: grid;
       place-items: center;
       background-color: hsl(0, 0%, 0%);
@@ -30,10 +31,10 @@
     }
 
     &-primary-container {
-      width: 55%;
-      max-height: 45vw;
+      margin-top: 1.5em;
       overflow: auto;
       padding: 1.5em 1.8em 0;
+      max-height: 60vh;
     }
     &-title {
       font-size: 2rem;
@@ -49,7 +50,6 @@
         width: 100%;
         display: flex;
         padding: 0.8em 1em;
-        white-space: nowrap;
         border-radius: 8px;
         background-color: hsl(0, 0%, 23%);
         gap: 8px;
@@ -97,6 +97,7 @@
   position: absolute;
   left: 20px;
   top: 20px;
+  z-index: 200;
   background-color: transparent;
   color: hsl(0, 0%, 50%);
   display: block;
@@ -106,5 +107,23 @@
   &:hover {
     cursor: pointer;
     color: tomato;
+  }
+}
+
+@media (min-width: 600px) {
+  .recipe-view {
+    &__recipe {
+      display: flex;
+      min-height: 50vw;
+
+      &-image-backdrop {
+        width: 45%;
+      }
+
+      &-primary-container {
+        width: 55%;
+        max-height: 45vw;
+      }
+    }
   }
 }

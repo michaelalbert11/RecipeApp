@@ -1,6 +1,7 @@
 import "./RecipeView.style.scss";
 import { Fragment } from "react";
 import { RecipeSelectState } from "../../context/RecipeSelect.context";
+import { RecipeListState } from "../../context/RecipeList.context";
 import {
   MdGridView,
   MdTimer,
@@ -9,15 +10,13 @@ import {
   // MdBookmarkBorder,
   MdPersonOutline,
 } from "react-icons/md";
-export default function RecipeView({ recipeList }) {
+export default function RecipeView() {
   const { recipeId, setRecipeId } = RecipeSelectState();
-  const recipe = recipeList.find((recipe) => recipe.id === recipeId);
-
+  const { state } = RecipeListState();
+  const recipe = state.recipeList.find((recipe) => recipe.id === recipeId);
+  console.log(recipe, recipeId, state.recipeList);
   return (
-    <section
-      className="recipe-view__backdrop"
-      onBlur={() => setRecipeId(undefined)}
-    >
+    <section className="recipe-view__backdrop">
       <button className="close-btn" onClick={() => setRecipeId(undefined)}>
         <MdClear />
       </button>
