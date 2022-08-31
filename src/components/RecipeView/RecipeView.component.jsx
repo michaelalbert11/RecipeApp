@@ -2,17 +2,19 @@ import "./RecipeView.style.scss";
 import { Fragment } from "react";
 import { RecipeSelectState } from "../../context/RecipeSelect.context";
 import { RecipeListState } from "../../context/RecipeList.context";
+import { SavedRecipesState } from "../../context/SavedRecipes.context";
 import {
-  MdGridView,
   MdTimer,
+  MdFiberManualRecord,
   MdClear,
-  // MdBookmark,
-  // MdBookmarkBorder,
+  MdBookmark,
+  MdBookmarkBorder,
   MdPersonOutline,
 } from "react-icons/md";
 export default function RecipeView() {
   const { recipeId, setRecipeId } = RecipeSelectState();
   const { state } = RecipeListState();
+  const { savedRecipes, dispatch } = SavedRecipesState();
   const recipe = state.recipeList.find((recipe) => recipe.id === recipeId);
   console.log(recipe, recipeId, state.recipeList);
   return (
@@ -36,32 +38,36 @@ export default function RecipeView() {
               <div className="recipe-view__recipe-info-bar">
                 <MdTimer className="recipe-view__recipe-info-bar-icon" />
                 <span className="recipe-view__recipe-info-bar-text">
-                  {recipe.readyInMinutes} minutes
+                  {recipe.readyInMinutes} min
                 </span>
               </div>
               <div className="recipe-view__recipe-info-bar">
                 <MdPersonOutline className="recipe-view__recipe-info-bar-icon" />
                 <span className="recipe-view__recipe-info-bar-text">
                   {recipe.servings > 1
-                    ? recipe.servings + " members"
-                    : recipe.servings + " member"}
+                    ? recipe.servings + " adults"
+                    : recipe.servings + " adult"}
                 </span>
               </div>
-              <div className="recipe-view__recipe-info-bar">
-                <MdGridView className="recipe-view__recipe-info-bar-icon" />
-                <span className="recipe-view__recipe-info-bar-text">
-                  {recipe.dishTypes.find(
-                    (dish) =>
-                      dish === "main course" ||
-                      dish === "side dish" ||
-                      dish === "salad" ||
-                      dish === "soup" ||
-                      dish === "bread" ||
-                      dish === "dessert" ||
-                      dish === "snack"
-                  )}
-                </span>
-              </div>
+              {recipe.vegetarian ? (
+                <div className="recipe-view__recipe-info-bar">
+                  <MdFiberManualRecord
+                    style={{ color: "rgb(0,255,64)" }}
+                    className="recipe-view__recipe-info-bar-icon"
+                  />
+                  <span className="recipe-view__recipe-info-bar-text">veg</span>
+                </div>
+              ) : (
+                <div className="recipe-view__recipe-info-bar">
+                  <MdFiberManualRecord
+                    style={{ color: "tomato" }}
+                    className="recipe-view__recipe-info-bar-icon"
+                  />
+                  <span className="recipe-view__recipe-info-bar-text">
+                    non veg
+                  </span>
+                </div>
+              )}
             </div>
             <h3 className="recipe-view__sub-title">Ingredients</h3>
             <ul className="recipe-view__ingredients">
@@ -83,6 +89,29 @@ export default function RecipeView() {
                     <li className="recipe-view__instruction">{ins.step} </li>
                   ))}
             </ol>
+            <button className="recipe-view__recipe-save">
+              {savedRecipes.some((rec) =>
+                rec.id === recipe.id ? (
+                  <div
+                    onClick={() =>
+                      dispatch({ type: "REMOVE_RECIPE_SAVED", payload: recipe })
+                    }
+                  >
+                    <MdBookmark />
+                    <span>saved</span>
+                  </div>
+                ) : (
+                  <div
+                    onClick={() =>
+                      dispatch({ type: "ADD_TO_SAVED", payload: recipe })
+                    }
+                  >
+                    <MdBookmarkBorder />
+                    <span>save recipe</span>
+                  </div>
+                )
+              )}
+            </button>
           </div>
         </div>
       </div>
