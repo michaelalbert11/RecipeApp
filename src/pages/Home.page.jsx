@@ -1,9 +1,10 @@
 import RecipeList from "../components/RecipeList/RecipeList.component";
 import Category from "../components/Category/Category.component";
 import Banner from "../components/Banner/Banner.component";
+
 export default function Home() {
   return (
-    <main>
+    <section>
       <div className="container">
         <Category />
         <Banner
@@ -14,6 +15,6 @@ export default function Home() {
         />
         <RecipeList />
       </div>
-    </main>
+    </section>
   );
 }

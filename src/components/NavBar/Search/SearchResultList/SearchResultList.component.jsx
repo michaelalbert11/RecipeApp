@@ -1,9 +1,11 @@
 import { RecipeListState } from "../../../../context/RecipeList.context";
 import "./SearchResultList.style.scss";
+import { RecipeSelectState } from "../../../../context/RecipeSelect.context";
 export let searchResultList = [];
 export default function SearchResultList(props) {
   const { searchValue } = props;
   const { state } = RecipeListState();
+  const { setRecipeId } = RecipeSelectState();
   searchResultList = state.recipeList.filter(
     (recipe) =>
       recipe.title
@@ -20,7 +22,11 @@ export default function SearchResultList(props) {
     <ul className="navbar__search-result-list">
       {searchResultList.length > 0 ? (
         searchResultList.map((recipe) => (
-          <li className="navbar__search-result-list-item" key={recipe.id}>
+          <li
+            className="navbar__search-result-list-item"
+            onMouseDown={() => setRecipeId(recipe.id)}
+            key={recipe.id}
+          >
             {recipe.title}
           </li>
         ))

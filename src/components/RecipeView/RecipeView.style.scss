@@ -1,0 +1,110 @@
+.recipe-view {
+  &__backdrop {
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: grid;
+    place-items: center;
+  }
+
+  &__recipe {
+    display: flex;
+    background-color: hsl(0, 0%, 13%);
+    font-family: product-bold;
+    color: bisque;
+    min-height: 50vw;
+    &-image-backdrop {
+      width: 45%;
+      display: grid;
+      place-items: center;
+      background-color: hsl(0, 0%, 0%);
+    }
+
+    &-image {
+      width: 100%;
+    }
+
+    &-primary-container {
+      width: 55%;
+      max-height: 45vw;
+      overflow: auto;
+      padding: 1.5em 1.8em 0;
+    }
+    &-title {
+      font-size: 2rem;
+      font-weight: normal;
+    }
+
+    &-info {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      margin-top: 25px;
+      &-bar {
+        width: 100%;
+        display: flex;
+        padding: 0.8em 1em;
+        white-space: nowrap;
+        border-radius: 8px;
+        background-color: hsl(0, 0%, 23%);
+        gap: 8px;
+        text-transform: capitalize;
+        align-items: center;
+
+        &-icon {
+          font-size: 1.5rem;
+        }
+
+        &-text {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+
+  &__sub-title {
+    font-weight: normal;
+    font-size: 1.5rem;
+    margin-top: 0.5em;
+  }
+
+  &__ingredients {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 35px;
+  }
+
+  &__instruction,
+  &__ingredient {
+    font-size: 1.2rem;
+    margin-top: 0.3em;
+  }
+
+  &__ingredient {
+    text-transform: capitalize;
+  }
+
+  &__sub-heading {
+    font-size: 1.3rem;
+  }
+}
+.close-btn {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  background-color: transparent;
+  color: hsl(0, 0%, 50%);
+  display: block;
+  border: none;
+  font-size: 2.1rem;
+
+  &:hover {
+    cursor: pointer;
+    color: tomato;
+  }
+}

@@ -1,13 +1,19 @@
 import "./RecipeCard.style.scss";
 import { MdBookmarkBorder, MdBookmark } from "react-icons/md";
 import { SavedRecipesState } from "../../context/SavedRecipes.context";
-import { ToastContainer, toast } from "react-toastify";
-export default function RecipeCard({ recipe }) {
+import { RecipeSelectState } from "../../context/RecipeSelect.context";
+export default function RecipeCard(props) {
+  const { recipe, notifyAdd, notifyDelete } = props;
   const { savedRecipes, dispatch } = SavedRecipesState();
-  const notifyAdd = (message) => toast.success(message);
-  const notifyDelete = (message) => toast.error(message);
+  const { setRecipeId } = RecipeSelectState();
+
   return (
-    <div className="recipe-card">
+    <div
+      className="recipe-card"
+      onClick={() => {
+        setRecipeId(recipe.id);
+      }}
+    >
       <img
         className="recipe-card__image"
         src={
@@ -21,32 +27,27 @@ export default function RecipeCard({ recipe }) {
         <span className="recipe-card__title">{recipe.title}</span>
         {savedRecipes.some((rec) => rec.id === recipe.id) ? (
           <span
-            onClick={() => {
+            onClick={(event) => {
               dispatch({ type: "REMOVE_FROM_SAVED", payload: recipe });
               notifyDelete("Removed");
+              event.stopPropagation();
             }}
           >
             <MdBookmark className="recipe-card__icon" />
           </span>
         ) : (
           <span
-            onClick={() => {
+            onClick={(event) => {
               dispatch({ type: "ADD_TO_SAVED", payload: recipe });
+              notifyAdd("Saved");
+              event.stopPropagation();
             }}
-            onMouseDown={() => notifyAdd("Saved")}
           >
             <MdBookmarkBorder className="recipe-card__icon" />
           </span>
         )}
         {recipe.isUserAdded && <span>your recipe</span>}
       </div>
-      <ToastContainer
-        position="top-center"
-        theme="dark"
-        closeOnClick={false}
-        autoClose={800}
-        hideProgressBar
-      />
     </div>
   );
 }

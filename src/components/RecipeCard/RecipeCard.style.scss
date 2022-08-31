@@ -1,6 +1,10 @@
 .recipe-card {
   position: relative;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   &__image {
     width: 100%;
     border-radius: 10px;
@@ -41,6 +45,29 @@
     font-size: 1.05rem;
     padding: 0 0.7em;
     margin-bottom: 1em;
+
+    @media (min-width: 600px) {
+      font-size: 1.2rem;
+
+      &:hover &-overlay {
+        display: block;
+      }
+    }
+
+    &-overlay {
+      display: none;
+
+      position: absolute;
+      bottom: 50px;
+      left: 10px;
+      background-color: hsl(0, 0%, 7%);
+
+      font-size: 0.9rem;
+      color: hsl(0, 0%, 70%);
+
+      border-radius: 5px;
+      padding: 0.5em;
+    }
   }
 
   &__icon {
@@ -53,5 +80,9 @@
     background-color: rgba(0, 0, 0, 0.5);
     color: bisque;
     right: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

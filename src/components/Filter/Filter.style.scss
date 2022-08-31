@@ -21,6 +21,10 @@
     font-family: inherit;
     color: bisque;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     &-icon {
       font-size: 1.2rem;
     }
