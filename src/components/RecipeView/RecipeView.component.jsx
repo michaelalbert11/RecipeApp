@@ -5,8 +5,8 @@ import {
   MdGridView,
   MdTimer,
   MdClear,
-  MdBookmark,
-  MdBookmarkBorder,
+  // MdBookmark,
+  // MdBookmarkBorder,
   MdPersonOutline,
 } from "react-icons/md";
 export default function RecipeView({ recipeList }) {

@@ -4,12 +4,9 @@ import RecipeCard from "../RecipeCard/RecipeCard.component";
 import Filter from "../Filter/Filter.component";
 import { toast } from "react-toastify";
 import { RecipeListState } from "../../context/RecipeList.context";
-import { RecipeSelectState } from "../../context/RecipeSelect.context";
-import RecipeView from "../RecipeView/RecipeView.component";
 export default function RecipeList() {
   const { state } = RecipeListState();
   const [filteredList, setFilteredList] = useState(state.recipeList);
-  const { recipeId } = RecipeSelectState();
   function handleOnSelect(event) {
     (event.target.innerText.toLowerCase() === "veg" &&
       setFilteredList(

@@ -6,13 +6,9 @@ import Filter from "../../components/Filter/Filter.component";
 import { useState } from "react";
 import Banner from "../../components/Banner/Banner.component";
 import { toast } from "react-toastify";
-import RecipeView from "../../components/RecipeView/RecipeView.component";
-import { RecipeSelectState } from "../../context/RecipeSelect.context";
 export default function Categories() {
   const { state } = RecipeListState();
   const { category } = CategoryState();
-  const { recipeId } = RecipeSelectState();
-  console.log(category, "category");
   const newList = state.recipeList.filter((recipe) =>
     recipe.dishTypes.includes(category)
   );
