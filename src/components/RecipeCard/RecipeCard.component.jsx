@@ -2,6 +2,7 @@ import "./RecipeCard.style.scss";
 import { MdBookmarkBorder, MdBookmark } from "react-icons/md";
 import { SavedRecipesState } from "../../context/SavedRecipes.context";
 import { RecipeSelectState } from "../../context/RecipeSelect.context";
+import { FaUser } from "react-icons/fa";
 export default function RecipeCard(props) {
   const { recipe, notifyAdd, notifyDelete } = props;
   const { savedRecipes, dispatch } = SavedRecipesState();
@@ -46,7 +47,11 @@ export default function RecipeCard(props) {
             <MdBookmarkBorder className="recipe-card__icon" />
           </span>
         )}
-        {recipe.isUserAdded && <span>your recipe</span>}
+        {recipe.isUserAdded && (
+          <span className="recipe-card__user-icon">
+            <FaUser style={{ color: "bisque" }} />
+          </span>
+        )}
       </div>
     </div>
   );

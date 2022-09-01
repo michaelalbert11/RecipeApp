@@ -15,7 +15,7 @@ export default function RecipeInput(props) {
     handleIngredientAdd,
     handleInstructionAdd,
   } = CurrentRecipeState();
-  const { title, handler, action } = props;
+  const { title, handler, action, notification } = props;
 
   const Ingredients = currentRecipe.extendedIngredients.map((ingredient) => (
     <IngredientInput
@@ -191,7 +191,7 @@ export default function RecipeInput(props) {
             className="recipe-input__btn recipe-input__btn--main"
             onClick={() => {
               setCurrentRecipe(sampleRecipe);
-              notifyRecipeAdd("recipe added");
+              notifyRecipeAdd({ notification });
             }}
             onMouseDown={() => handler()}
           >

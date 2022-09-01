@@ -42,9 +42,10 @@
       overflow: auto;
       padding: 1.5em 1.8em 0;
       max-height: 60vh;
+      margin-bottom: 2em;
     }
     &-title {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: normal;
     }
 
@@ -111,7 +112,7 @@
   padding: 0.2em 0.2em 0em;
   border-radius: 30px;
   border: none;
-  font-size: 2.1rem;
+  font-size: 1.5rem;
 
   &:hover {
     cursor: pointer;
@@ -124,6 +125,10 @@
     &__recipe {
       display: flex;
       min-height: 50vw;
+
+      &__title {
+        font-size: 2rem;
+      }
 
       &-image-backdrop {
         width: 45%;
@@ -139,6 +144,10 @@
 
         &-bar {
           padding-inline: 1.1em;
+
+          &-text {
+            font-size: 1.1rem;
+          }
         }
       }
     }

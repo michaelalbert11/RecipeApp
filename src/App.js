@@ -12,11 +12,21 @@ import "react-toastify/dist/ReactToastify.css";
 import "./notification.style.scss";
 import { RecipeSelectState } from "./context/RecipeSelect.context";
 import RecipeView from "./components/RecipeView/RecipeView.component";
+import { CurrentRecipeState } from "./context/CurrentRecipe.context";
+import RecipeInput from "./components/RecipeInput/RecipeInput.component";
+import { useState } from "react";
+import { MdClear } from "react-icons/md";
 function App() {
+  const { currentRecipe } = CurrentRecipeState();
   const { state, dispatch } = RecipeListState();
   const { recipeId } = RecipeSelectState();
+  const [viewRecipeEdit, setViewRecipeEdit] = useState(false);
+  console.log(viewRecipeEdit);
   // 25e4755ea5894d8098e74f88d8eec18d
   // ebea031fb63040498bef29db8a70d404
+  function openRecipeEdit() {
+    setViewRecipeEdit(true);
+  }
   useEffect(() => {
     fetch(
       "https://api.spoonacular.com/recipes/random?apiKey=25e4755ea5894d8098e74f88d8eec18d&number=100"
@@ -49,7 +59,43 @@ function App() {
             autoClose={800}
             hideProgressBar
           />
-          {recipeId && <RecipeView />}
+          {viewRecipeEdit && (
+            <section
+              style={{
+                backgroundColor: "rgba(0,0,0,0.8)",
+                position: "fixed",
+                height: "100vh",
+                width: "100vw",
+              }}
+            >
+              <span
+                onClick={setViewRecipeEdit(false)}
+                style={{
+                  position: "absolute",
+                  top: "15px",
+                  left: "15px",
+                  color: "red",
+                  fontSize: "1.3rem",
+                }}
+              >
+                <MdClear />
+              </span>
+              <RecipeInput
+                action={"save recipe"}
+                handler={() =>
+                  dispatch({
+                    type: "EDIT_SAVED_RECIPE",
+                    payload: currentRecipe,
+                  })
+                }
+                title={"edit recipe"}
+                notification={"recipe saved"}
+              />
+            </section>
+          )}
+          {recipeId && (
+            <RecipeView recipeDelete={dispatch} openRecipe={openRecipeEdit} />
+          )}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="saved" element={<SavedRecipes />} />

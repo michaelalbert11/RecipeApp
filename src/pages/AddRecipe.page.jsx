@@ -10,6 +10,7 @@ export default function AddRecipe() {
       title={"add recipe"}
       handler={() => dispatch({ type: "ADD RECIPE", payload: currentRecipe })}
       action="add recipe"
+      notification={"recipe added"}
     />
   );
 }

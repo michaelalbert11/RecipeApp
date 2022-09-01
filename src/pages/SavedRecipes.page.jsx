@@ -9,7 +9,7 @@ export default function SavedRecipes() {
   const notifyDelete = (message) => toast.error(message);
 
   return (
-    <section className="template container">
+    <section style={{ minHeight: "82.3vh" }} className="template container">
       <h1 className="template__heading">Saved recipes</h1>
       <div className="template-card__grid">
         {savedRecipes.map((recipe) => (

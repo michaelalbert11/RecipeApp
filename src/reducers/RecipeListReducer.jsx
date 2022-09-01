@@ -14,9 +14,22 @@ export const RecipeListReducer = (state, action) => {
       };
     case "ADD RECIPE":
       return {
-        loading: false,
         recipeList: [...state.recipeList, action.payload],
-        error: "",
+      };
+    case "DELETE_RECIPE":
+      return {
+        recipeList: state.recipeList.filter(
+          (recipe) => recipe.id !== action.id
+        ),
+      };
+    case "SAVE_EDITED_RECIPE":
+      const newList = [...state.recipeList];
+      const index = newList.findIndex(
+        (recipe) => recipe.id === action.payload.id
+      );
+      newList[index] = action.payload;
+      return {
+        recipeList: newList,
       };
     default:
       return state;

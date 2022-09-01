@@ -23,7 +23,7 @@ export default function RecipeList() {
   const notifyDelete = (message) => toast.error(message);
 
   return (
-    <section>
+    <section style={{ paddingBottom: "4em" }}>
       <Filter handleOnSelect={handleOnSelect} />
       <div className="recipe-card__grid">
         {filteredList.map((recipe) => (
