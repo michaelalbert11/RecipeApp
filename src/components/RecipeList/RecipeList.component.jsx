@@ -36,7 +36,6 @@ export default function RecipeList() {
           />
         ))}
       </div>
-      {/* {recipeId && <RecipeView recipeList={state.recipeList} />} */}
     </section>
   );
 }

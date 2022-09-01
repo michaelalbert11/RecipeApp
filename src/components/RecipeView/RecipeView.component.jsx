@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { RecipeSelectState } from "../../context/RecipeSelect.context";
 import { RecipeListState } from "../../context/RecipeList.context";
 import { SavedRecipesState } from "../../context/SavedRecipes.context";
+import { toast } from "react-toastify";
 import {
   MdTimer,
   MdFiberManualRecord,
@@ -17,6 +18,8 @@ export default function RecipeView() {
   const { savedRecipes, dispatch } = SavedRecipesState();
   const recipe = state.recipeList.find((recipe) => recipe.id === recipeId);
   console.log(recipe, recipeId, state.recipeList);
+  const notifyAdd = (message) => toast.success(message);
+  const notifyDelete = (message) => toast.error(message);
   return (
     <section className="recipe-view__backdrop">
       <button className="close-btn" onClick={() => setRecipeId(undefined)}>
@@ -34,6 +37,27 @@ export default function RecipeView() {
 
           <div className="recipe-view__recipe-primary-container">
             <h1 className="recipe-view__recipe-title">{recipe.title}</h1>
+            <span className="recipe-view__save-btn">
+              {savedRecipes.some((rec) => rec.id === recipe.id) ? (
+                <span
+                  onClick={() => {
+                    dispatch({ type: "REMOVE_FROM_SAVED", payload: recipe });
+                    notifyDelete("Removed");
+                  }}
+                >
+                  <MdBookmark />
+                </span>
+              ) : (
+                <span
+                  onClick={() => {
+                    dispatch({ type: "ADD_TO_SAVED", payload: recipe });
+                    notifyAdd("Added");
+                  }}
+                >
+                  <MdBookmarkBorder />
+                </span>
+              )}
+            </span>
             <div className="recipe-view__recipe-info">
               <div className="recipe-view__recipe-info-bar">
                 <MdTimer className="recipe-view__recipe-info-bar-icon" />
@@ -89,29 +113,6 @@ export default function RecipeView() {
                     <li className="recipe-view__instruction">{ins.step} </li>
                   ))}
             </ol>
-            <button className="recipe-view__recipe-save">
-              {savedRecipes.some((rec) =>
-                rec.id === recipe.id ? (
-                  <div
-                    onClick={() =>
-                      dispatch({ type: "REMOVE_RECIPE_SAVED", payload: recipe })
-                    }
-                  >
-                    <MdBookmark />
-                    <span>saved</span>
-                  </div>
-                ) : (
-                  <div
-                    onClick={() =>
-                      dispatch({ type: "ADD_TO_SAVED", payload: recipe })
-                    }
-                  >
-                    <MdBookmarkBorder />
-                    <span>save recipe</span>
-                  </div>
-                )
-              )}
-            </button>
           </div>
         </div>
       </div>

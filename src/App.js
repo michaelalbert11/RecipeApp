@@ -49,7 +49,7 @@ function App() {
             autoClose={800}
             hideProgressBar
           />
-          {recipeId && <RecipeView recipeList={state.recipeList} />}
+          {recipeId && <RecipeView />}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="saved" element={<SavedRecipes />} />

@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10000;
+    z-index: 100;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.8);
@@ -13,6 +13,13 @@
   }
   &__container {
     width: 100%;
+  }
+
+  &__save-btn {
+    font-size: 2rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
   &__recipe {
     height: 100vh;
@@ -45,11 +52,11 @@
       display: flex;
       gap: 10px;
       align-items: center;
-      margin-top: 25px;
+      margin-top: 15px;
       &-bar {
         width: 100%;
         display: flex;
-        padding: 0.8em 0.5em;
+        padding: 0.8em 0.3em;
         border-radius: 8px;
         background-color: hsl(0, 0%, 23%);
         gap: 3px;
@@ -61,7 +68,7 @@
         }
 
         &-text {
-          font-size: 1.1rem;
+          font-size: 1rem;
         }
       }
     }
