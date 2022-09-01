@@ -1,7 +1,15 @@
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background-image: url("../../assets/—Pngtree—hand\ drawn\ fast\ food\ doodle_5280161.png");
+  background-position: center;
+  background-repeat: repeat-x;
+  background-color: hsl(0, 0%, 7%);
+  background-size: 500px;
   &__container {
     display: flex;
-    padding-top: 2.5em;
+    padding: 1.5em;
     align-items: center;
     justify-content: space-between;
     font-family: product-bold;
