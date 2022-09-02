@@ -16,6 +16,7 @@ import { CurrentRecipeState } from "./context/CurrentRecipe.context";
 import RecipeInput from "./components/RecipeInput/RecipeInput.component";
 import { useState } from "react";
 import { MdClear } from "react-icons/md";
+import Login from "./pages/Login.page";
 function App() {
   const { currentRecipe } = CurrentRecipeState();
   const { state, dispatch } = RecipeListState();
@@ -100,6 +101,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="saved" element={<SavedRecipes />} />
             <Route path="add-recipe" element={<AddRecipe />} />
+            <Route path="login" element={<Login />} />
             <Route path="categories/:category" element={<Categories />} />
           </Routes>
         </main>

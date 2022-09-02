@@ -191,7 +191,7 @@ export default function RecipeInput(props) {
             className="recipe-input__btn recipe-input__btn--main"
             onClick={() => {
               setCurrentRecipe(sampleRecipe);
-              notifyRecipeAdd({ notification });
+              notifyRecipeAdd(notification);
             }}
             onMouseDown={() => handler()}
           >
