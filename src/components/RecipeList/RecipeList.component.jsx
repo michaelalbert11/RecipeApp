@@ -1,32 +1,33 @@
-import React, { useState } from "react";
 import "./RecipeList.style.scss";
 import RecipeCard from "../RecipeCard/RecipeCard.component";
 import Filter from "../Filter/Filter.component";
 import { toast } from "react-toastify";
 import { RecipeListState } from "../../context/RecipeList.context";
 export default function RecipeList() {
-  const { state } = RecipeListState();
-  const [filteredList, setFilteredList] = useState(state.recipeList);
-  function handleOnSelect(event) {
-    (event.target.innerText.toLowerCase() === "veg" &&
-      setFilteredList(
-        state.recipeList.filter((recipe) => recipe.vegetarian)
-      )) ||
-      (event.target.innerText.toLowerCase() === "non veg" &&
-        setFilteredList(
-          state.recipeList.filter((recipe) => !recipe.vegetarian)
-        )) ||
-      (event.target.innerText.toLowerCase() === "no filter" &&
-        setFilteredList(state.recipeList));
+  const { state, filter } = RecipeListState();
+  // const [filteredList, setFilteredList] = useState(state.recipeList);
+  // console.log(filteredList);
+  function RecList() {
+    let data = [...state.recipeList];
+    if (filter.veg) {
+      data = data.filter((recipe) => recipe.vegetarian);
+    }
+    if (filter.nonveg) {
+      data = data.filter((recipe) => !recipe.vegetarian);
+    }
+    if (filter.noFilter) {
+      data = state.recipeList;
+    }
+    return data;
   }
   const notifyAdd = (message) => toast.success(message);
   const notifyDelete = (message) => toast.error(message);
 
   return (
     <section style={{ paddingBottom: "4em" }}>
-      <Filter handleOnSelect={handleOnSelect} />
+      <Filter />
       <div className="recipe-card__grid">
-        {filteredList.map((recipe) => (
+        {RecList().map((recipe) => (
           <RecipeCard
             className="recipe-card__grid-item"
             key={recipe.id}

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./Filter.style.scss";
 import { MdArrowDropDown } from "react-icons/md";
-export default function Filter(props) {
-  const { handleOnSelect } = props;
+import { RecipeListState } from "../../context/RecipeList.context";
+export default function Filter() {
+  const { setFilter } = RecipeListState();
   const [filterState, setFilterState] = useState({
     selectedOption: "No Filter",
     optionActive: false,
@@ -39,8 +40,8 @@ export default function Filter(props) {
           <li
             className="filter__option "
             onMouseDown={(event) => {
-              handleOnSelect(event);
               setCurrentOption(event);
+              setFilter({ noFilter: true });
             }}
           >
             <span>no filter</span>
@@ -48,8 +49,8 @@ export default function Filter(props) {
           <li
             className="filter__option "
             onMouseDown={(event) => {
-              handleOnSelect(event);
               setCurrentOption(event);
+              setFilter({ veg: true });
             }}
           >
             <span>veg</span>
@@ -57,8 +58,8 @@ export default function Filter(props) {
           <li
             className="filter__option "
             onMouseDown={(event) => {
-              handleOnSelect(event);
               setCurrentOption(event);
+              setFilter({ nonveg: true });
             }}
           >
             <span>non veg</span>

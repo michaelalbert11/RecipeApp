@@ -9,13 +9,12 @@ export default function Login() {
           height: "100%",
           display: "grid",
           placeItems: "center",
-
           minHeight: "85vh",
         }}
       >
         <div style={{ display: "inherit", placeItems: "inherit", gap: "20px" }}>
           <h1 style={{ color: "bisque", fontSize: "2rem" }}>
-            Feature in development{" "}
+            Feature in development
           </h1>
           <FaGrinTongueWink style={{ fontSize: "15rem", color: "yellow" }} />
         </div>

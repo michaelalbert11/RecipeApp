@@ -12,13 +12,14 @@ export const RecipeListReducer = (state, action) => {
         recipeList: [],
         error: "something Went Wrong",
       };
+
     case "ADD RECIPE":
       return {
         recipeList: [...state.recipeList, action.payload],
       };
     case "DELETE_RECIPE":
       return {
-        recipeList: state.recipeList.filter(
+        recipeList: [...state.recipeList].filter(
           (recipe) => recipe.id !== action.id
         ),
       };

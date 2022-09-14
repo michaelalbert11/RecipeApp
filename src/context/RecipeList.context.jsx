@@ -1,4 +1,5 @@
 import React, { useContext, useReducer } from "react";
+import { useState } from "react";
 import { RecipeListReducer } from "../reducers/RecipeListReducer";
 const RecipeListContext2 = React.createContext();
 export default function RecipeList({ children }) {
@@ -12,8 +13,11 @@ export default function RecipeList({ children }) {
   function selectRecipe(id) {
     console.log(state.recipeList.find((recipe) => recipe.id === id));
   }
+  const [filter, setFilter] = useState({ noFilter: true });
   return (
-    <RecipeListContext2.Provider value={{ state, dispatch, selectRecipe }}>
+    <RecipeListContext2.Provider
+      value={{ state, dispatch, selectRecipe, filter, setFilter }}
+    >
       {children}
     </RecipeListContext2.Provider>
   );

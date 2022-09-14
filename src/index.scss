@@ -61,7 +61,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-main.main {
+main.main .recipe-input-section {
   background-image: url("./assets/—Pngtree—hand\ drawn\ fast\ food\ doodle_5280161.png");
   background-repeat: repeat;
   background-size: 500px;
@@ -72,7 +72,6 @@ main.main {
   width: 90%;
   margin: auto;
 }
-
 @keyframes infiniteMove {
   100% {
     background-position: 0 100%;

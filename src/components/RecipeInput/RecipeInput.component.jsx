@@ -1,4 +1,5 @@
 import "./RecipeInput.style.scss";
+import { v4 as uuidv4 } from "uuid";
 import {
   CurrentRecipeState,
   sampleRecipe,
@@ -119,8 +120,8 @@ export default function RecipeInput(props) {
                   name="readyInMinutes"
                   className="recipe-input__field-input"
                   type="text"
-                  placeholder="cook time : 40 min"
-                  value={currentRecipe.readyInMiuntes}
+                  placeholder="cook time (only min): 40  "
+                  value={currentRecipe.readyInMinutes}
                   onChange={(event) => handleRecipeChange(event)}
                 />
               </div>
@@ -190,7 +191,11 @@ export default function RecipeInput(props) {
           <button
             className="recipe-input__btn recipe-input__btn--main"
             onClick={() => {
-              setCurrentRecipe(sampleRecipe);
+              setCurrentRecipe({
+                ...sampleRecipe,
+                id: uuidv4(),
+                readyInMiuntes: "",
+              });
               notifyRecipeAdd(notification);
             }}
             onMouseDown={() => handler()}

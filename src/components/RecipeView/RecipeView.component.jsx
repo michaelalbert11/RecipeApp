@@ -1,9 +1,10 @@
+import { useState, Fragment } from "react";
 import "./RecipeView.style.scss";
-import { Fragment } from "react";
 import { RecipeSelectState } from "../../context/RecipeSelect.context";
 import { RecipeListState } from "../../context/RecipeList.context";
 import { SavedRecipesState } from "../../context/SavedRecipes.context";
 import { toast } from "react-toastify";
+import RecipeInput from "../RecipeInput/RecipeInput.component";
 import { CurrentRecipeState } from "../../context/CurrentRecipe.context";
 import {
   MdTimer,
@@ -15,13 +16,15 @@ import {
   MdCreate,
   MdDelete,
 } from "react-icons/md";
-export default function RecipeView({ recipeDelete, openRecipe }) {
-  const { setCurrentRecipe } = CurrentRecipeState();
+export default function RecipeView() {
+  const [viewRecipeEdit, setViewRecipeEdit] = useState();
+  const { currentRecipe, setCurrentRecipe } = CurrentRecipeState();
   const { recipeId, setRecipeId } = RecipeSelectState();
-  const { state } = RecipeListState();
+  const { state, dispatch: stateDispatch } = RecipeListState();
   const { savedRecipes, dispatch } = SavedRecipesState();
+
   const recipe = state.recipeList.find((recipe) => recipe.id === recipeId);
-  console.log(recipe, recipeId, state.recipeList);
+  console.log(recipe, recipeId, state.recipeList, viewRecipeEdit);
   const notifyAdd = (message) => toast.success(message);
   const notifyDelete = (message) => toast.error(message);
 
@@ -34,7 +37,11 @@ export default function RecipeView({ recipeDelete, openRecipe }) {
         <div className="recipe-view__recipe">
           <div className="recipe-view__recipe-image-backdrop">
             <img
-              src={recipe.image}
+              src={
+                recipe.image === "" || undefined
+                  ? "https://spoonacular.com/recipeImages/631888-556x470.jpg"
+                  : recipe.image
+              }
               alt={recipe.title}
               className="recipe-view__recipe-image"
             />
@@ -69,7 +76,7 @@ export default function RecipeView({ recipeDelete, openRecipe }) {
                   <span
                     onClick={() => {
                       setCurrentRecipe(recipe);
-                      openRecipe();
+                      setViewRecipeEdit(true);
                     }}
                     className="recipe-view__save-btn"
                   >
@@ -79,9 +86,14 @@ export default function RecipeView({ recipeDelete, openRecipe }) {
                 {recipe.isUserAdded && (
                   <span
                     onClick={() => {
-                      recipeDelete({ type: "DELETE_RECIPE", id: recipe.id });
+                      stateDispatch({ type: "DELETE_RECIPE", id: recipe.id });
                       setRecipeId(undefined);
                       notifyDelete("recipe deleted");
+                      savedRecipes.some((rec) => rec.id === recipe.id) &&
+                        dispatch({
+                          type: "REMOVE_FROM_SAVED",
+                          payload: recipe,
+                        });
                     }}
                     className="recipe-view__save-btn"
                   >
@@ -147,6 +159,53 @@ export default function RecipeView({ recipeDelete, openRecipe }) {
             </ol>
           </div>
         </div>
+
+        {viewRecipeEdit && (
+          <section
+            className="recipe-input-section"
+            style={{
+              zIndex: "300",
+              backgroundColor: "hsl(0,0%,7%)",
+              height: "100vh",
+              position: "fixed",
+              width: "100vw",
+              top: "0",
+              left: "0",
+              marginTop: "0",
+              display: "grid",
+              placeItems: "center",
+              backgroundImage:
+                ' url("../../assets/—Pngtree—hand drawn fast food doodle_5280161.png")',
+              backgroundPosition: " center",
+              backgroundRepeat: " repeat-x",
+              backgroundSize: "500px",
+            }}
+          >
+            <span
+              onClick={() => setViewRecipeEdit(false)}
+              style={{
+                position: "absolute",
+                top: "15px",
+                left: "15px",
+                color: "red",
+                fontSize: "1.3rem",
+              }}
+            >
+              <MdClear />
+            </span>
+            <RecipeInput
+              action={"save recipe"}
+              handler={() =>
+                stateDispatch({
+                  type: "SAVE_EDITED_RECIPE",
+                  payload: currentRecipe,
+                })
+              }
+              title={"edit recipe"}
+              notification={"recipe saved"}
+            />
+          </section>
+        )}
       </div>
     </section>
   );

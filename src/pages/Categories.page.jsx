@@ -1,25 +1,28 @@
-import RecipeCard from "../../components/RecipeCard/RecipeCard.component";
-import { CategoryState } from "../../context/Category.context";
-import "../template.style.scss";
-import { RecipeListState } from "../../context/RecipeList.context";
-import Filter from "../../components/Filter/Filter.component";
-import { useState } from "react";
-import Banner from "../../components/Banner/Banner.component";
+import RecipeCard from "../components/RecipeCard/RecipeCard.component";
+import { CategoryState } from "../context/Category.context";
+import "./template.style.scss";
+import { RecipeListState } from "../context/RecipeList.context";
+import Filter from "../components/Filter/Filter.component";
+import Banner from "../components/Banner/Banner.component";
 import { toast } from "react-toastify";
 export default function Categories() {
-  const { state } = RecipeListState();
+  const { state, filter } = RecipeListState();
   const { category } = CategoryState();
   const newList = state.recipeList.filter((recipe) =>
     recipe.dishTypes.includes(category)
   );
-  const [filteredList, setFilteredList] = useState(newList);
-  function handleOnSelect(event) {
-    (event.target.innerText.toLowerCase() === "veg" &&
-      setFilteredList(newList.filter((recipe) => recipe.vegetarian))) ||
-      (event.target.innerText.toLowerCase() === "non veg" &&
-        setFilteredList(newList.filter((recipe) => !recipe.vegetarian))) ||
-      (event.target.innerText.toLowerCase() === "no filter" &&
-        setFilteredList(newList));
+  function RecList() {
+    let data = [...newList];
+    if (filter.veg) {
+      data = data.filter((recipe) => recipe.vegetarian);
+    }
+    if (filter.nonveg) {
+      data = data.filter((recipe) => !recipe.vegetarian);
+    }
+    if (filter.noFilter) {
+      data = newList;
+    }
+    return data;
   }
   const notifyAdd = (message) => toast.success(message);
   const notifyDelete = (message) => toast.error(message);
@@ -47,10 +50,10 @@ export default function Categories() {
         }
         text={category.replace("||", "or")}
       />
-      <Filter handleOnSelect={handleOnSelect} />
+      <Filter />
       <div className="template-card__grid">
-        {filteredList.length >= 1
-          ? filteredList.map((recipe) => (
+        {RecList().length >= 1
+          ? RecList().map((recipe) => (
               <RecipeCard
                 className="template-card__grid-item"
                 key={recipe.id}
@@ -61,7 +64,6 @@ export default function Categories() {
             ))
           : `No ${category}s`}
       </div>
-      {/* {recipeId && <RecipeView recipeList={state.recipeList} />} */}
     </section>
   );
 }

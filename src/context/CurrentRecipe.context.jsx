@@ -48,7 +48,7 @@ export const sampleRecipe = {
 };
 export default function CurrentRecipe({ children }) {
   const [currentRecipe, setCurrentRecipe] = useState(sampleRecipe);
-  console.log(currentRecipe);
+  console.log(currentRecipe, "current");
 
   function handleRecipeChange(event) {
     setCurrentRecipe({

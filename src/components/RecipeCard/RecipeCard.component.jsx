@@ -18,7 +18,7 @@ export default function RecipeCard(props) {
       <img
         className="recipe-card__image"
         src={
-          recipe.image === undefined
+          recipe.image === "" || undefined
             ? "https://spoonacular.com/recipeImages/631888-556x470.jpg"
             : recipe.image
         }
